@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class ImageDatabase : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private ImageData[] m_Database;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
         
     }
