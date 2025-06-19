@@ -2,12 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PersonRace
-{
-    Black,
-    White,
-    Other
-}
 
 [CreateAssetMenu(fileName = "ImageData", menuName = "ScriptableObjects/ImageData")]
 public class ImageData : ScriptableObject
