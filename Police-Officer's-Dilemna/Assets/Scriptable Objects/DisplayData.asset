@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe72471134f12345a8ec2745f6079b0, type: 3}
   m_Name: DisplayData
   m_EditorClassIdentifier: 
-  m_MinImageTime: 0
-  m_MaxImageTime: 0
+  m_MinImageTime: 1
+  m_MaxImageTime: 5
