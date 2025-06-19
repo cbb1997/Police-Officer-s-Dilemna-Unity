@@ -12,7 +12,7 @@ public enum PersonRace
 [CreateAssetMenu(fileName = "ImageData", menuName = "ScriptableObjects/ImageData")]
 public class ImageData : ScriptableObject
 {
-    [SerializeField] private Sprite m_PersonImage;
+    [SerializeField] private Sprite m_PersonImage, m_BGImage;
 
     [SerializeField] private PersonRace m_ImagePersonRace;
 

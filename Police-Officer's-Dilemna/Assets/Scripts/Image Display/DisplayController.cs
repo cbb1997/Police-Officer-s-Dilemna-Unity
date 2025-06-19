@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class DisplayController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private DisplayData m_DisplayData;
+
+    [SerializeField] private GameObject[] m_People, m_BG;
+
+    private void Start()
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
         
     }
