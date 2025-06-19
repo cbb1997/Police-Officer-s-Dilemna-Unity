@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MinImageTime: 1
   m_MaxImageTime: 5
+  m_MaxPersonTime: 4
+  m_DisplayDelay: 0.5

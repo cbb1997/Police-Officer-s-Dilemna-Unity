@@ -24,6 +24,7 @@ public enum ResponseType
     Other
 }
 
+[System.Serializable]
 public class UserResponse
 {
     private PersonRace m_PersonRace;
@@ -51,17 +52,18 @@ public class UserResponse
     }
 }
 
+[System.Serializable]
 public class UserData
 {
-    private float m_Score;
+    [SerializeField] private float m_Score;
     internal float Score { get => m_Score; }
 
-    private List<UserResponse> m_Responses;
+    [SerializeField] private List<UserResponse> m_Responses;
 
     public void ResetData()
     {
         m_Score = 0;
-        m_Responses.Clear();
+        if(m_Responses != null) m_Responses.Clear();
     }
 
     public void AddResponse (UserResponse response)
@@ -81,7 +83,7 @@ public class UserData
 
 public class DataCollector : MonoBehaviour
 {
-    private UserData m_CurrentUserData;
+    [SerializeField] private UserData m_CurrentUserData;
 
     private void Start()
     {
