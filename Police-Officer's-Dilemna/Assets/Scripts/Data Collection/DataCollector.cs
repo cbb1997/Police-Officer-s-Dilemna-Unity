@@ -38,6 +38,10 @@ public class UserResponse
     private float m_ResponseTime;
     internal float ResponseTime { get => m_ResponseTime; }
 
+    private float m_BGTime, m_PersonTime;
+    internal float BGTime { get => m_BGTime; }
+    internal float PersonTime { get => m_PersonTime; }
+
     private bool m_Correct;
     internal bool Correct { get => m_Correct; }
 
