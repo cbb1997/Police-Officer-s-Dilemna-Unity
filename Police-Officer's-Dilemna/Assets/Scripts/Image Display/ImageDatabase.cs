@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ImageDatabase : MonoBehaviour
 {
-    [SerializeField] private ImageData[] m_Database;
+    [SerializeField] private PersonData[] m_PersonDatabase;
+
+    [SerializeField] private BGData[] m_BGDatabase;
 
     private void Start()
     {
