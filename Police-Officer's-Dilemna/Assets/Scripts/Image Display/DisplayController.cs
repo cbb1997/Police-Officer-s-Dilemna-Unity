@@ -8,6 +8,8 @@ public class DisplayController : MonoBehaviour
 {
     [SerializeField] private DisplayData m_DisplayData;
 
+    [SerializeField] private GameObject m_ScreenFilter;
+
     private ImageDatabase m_ImageDatabase;
 
     private float m_CurrentGenerationTime;
@@ -39,6 +41,11 @@ public class DisplayController : MonoBehaviour
 
     private IEnumerator GenerateHelper(float delay)
     {
+        if (m_CurrentBG == null && m_CurrentPerson == null)
+        {
+            m_ScreenFilter.SetActive(true);
+        }
+
         yield return new WaitForSeconds(delay);
 
         m_CurrentGenerationTime = UnityEngine.Random.Range(m_DisplayData.MinImageTime, m_DisplayData.MaxImageTime);
@@ -48,6 +55,8 @@ public class DisplayController : MonoBehaviour
 
         m_CurrentGenerationTime = UnityEngine.Random.Range(m_DisplayData.MinImageTime, maxTime);
         StartCoroutine(GeneratePerson(m_CurrentGenerationTime));
+
+        m_ScreenFilter.SetActive(false);
     }
 
     private IEnumerator GenerateBG(float bgTime)
@@ -57,7 +66,10 @@ public class DisplayController : MonoBehaviour
         yield return new WaitForSeconds(bgTime);
 
         Destroy(m_CurrentBG);
+        m_CurrentBG = null;
+        
         Destroy(m_CurrentPerson);
+        m_CurrentPerson = null;
 
         GenerateImage();
     }
