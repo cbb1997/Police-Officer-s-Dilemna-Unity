@@ -12,4 +12,24 @@ public class ImageDatabase : MonoBehaviour
     {
         
     }
+
+    public int GetPersonLength()
+    {
+        return m_PersonDatabase.Length;
+    }
+
+    public int GetBGLength()
+    {
+        return m_BGDatabase.Length;
+    }
+
+    public GameObject GetPersonPrefab(int i)
+    {
+        return m_PersonDatabase[i].Prefab;
+    }
+
+    public GameObject GetBGPrefab(int i)
+    {
+        return m_BGDatabase[i].Prefab;
+    }
 }

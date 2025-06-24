@@ -8,9 +8,10 @@ public class DisplayController : MonoBehaviour
 {
     [SerializeField] private DisplayData m_DisplayData;
 
-    [SerializeField] private GameObject[] m_People, m_BG;
+    private ImageDatabase m_ImageDatabase;
 
     private float m_CurrentGenerationTime;
+
     private GameObject m_CurrentPerson, m_CurrentBG;
 
     private void Start()
@@ -20,6 +21,8 @@ public class DisplayController : MonoBehaviour
             Debug.LogError("Missing DisplayData. Terminating Application.");
             QuitGame();
         }
+
+        m_ImageDatabase = GetComponent<ImageDatabase>();
 
         GenerateImage();
     }
@@ -49,7 +52,7 @@ public class DisplayController : MonoBehaviour
 
     private IEnumerator GenerateBG(float bgTime)
     {
-        m_CurrentBG = Instantiate(m_BG[new System.Random().Next(0, m_BG.Length)]);
+        m_CurrentBG = Instantiate(m_ImageDatabase.GetBGPrefab(new System.Random().Next(0, m_ImageDatabase.GetBGLength())));
 
         yield return new WaitForSeconds(bgTime);
 
@@ -65,7 +68,7 @@ public class DisplayController : MonoBehaviour
 
         yield return new WaitForSeconds(personTime);
 
-        m_CurrentPerson = Instantiate(m_People[new System.Random().Next(0, m_People.Length)]);
+        m_CurrentPerson = Instantiate(m_ImageDatabase.GetPersonPrefab(new System.Random().Next(0, m_ImageDatabase.GetPersonLength())));
     }
 
     private void QuitGame()
