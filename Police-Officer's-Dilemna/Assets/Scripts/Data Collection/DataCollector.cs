@@ -11,17 +11,17 @@ public enum PersonRace
 
 public enum ObjectType
 {
-    Weapon,
-    Innocuous,
-    Other
+    Weapon = 2,
+    Innocuous = 1,
+    Other = 3
 }
 
 public enum ResponseType
 {
-    Shoot,
-    Clear,
-    NoResponse,
-    Other
+    Shoot = 2,
+    Clear = 1,
+    NoResponse = 0,
+    Other = 3
 }
 
 [System.Serializable]
@@ -33,7 +33,7 @@ public class UserResponse
     private ObjectType m_ObjectType;
     internal ObjectType ObjectType { get => m_ObjectType; }
 
-    private ResponseType m_ResponseType;
+    [SerializeField] private ResponseType m_ResponseType;
     internal ResponseType ResponseType { get => m_ResponseType; }
 
     private float m_ResponseTime;
@@ -43,12 +43,23 @@ public class UserResponse
     internal float BGTime { get => m_BGTime; }
     internal float PersonTime { get => m_PersonTime; }
 
-    private bool m_Correct;
+    [SerializeField] private bool m_Correct;
     internal bool Correct { get => m_Correct; }
 
-    internal UserResponse()
+    internal UserResponse(ResponseType responseType, ObjectType objectType)
     {
+        m_ResponseType = responseType;
 
+        m_ObjectType = objectType;
+
+        if ((int)(m_ObjectType) == (int)(m_ResponseType))
+        {
+            m_Correct = true;
+        }
+        else
+        {
+            m_Correct = false;
+        }
     }
 }
 
@@ -66,7 +77,7 @@ public class UserData
         if(m_Responses != null) m_Responses.Clear();
     }
 
-    public void AddResponse (UserResponse response)
+    internal void AddResponse (UserResponse response)
     {
         if (response.Correct) 
         { 
@@ -95,5 +106,12 @@ public class DataCollector : MonoBehaviour
     private void Update()
     {
         
+    }
+
+    public void NewResponse(int responseType)
+    {
+        ObjectType currentObjectType = ObjectType.Other;
+
+        m_CurrentUserData.AddResponse(new UserResponse((ResponseType)responseType, currentObjectType));
     }
 }

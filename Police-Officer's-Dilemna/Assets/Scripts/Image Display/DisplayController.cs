@@ -61,7 +61,9 @@ public class DisplayController : MonoBehaviour
 
     private IEnumerator GenerateBG(float bgTime)
     {
-        m_CurrentBG = Instantiate(m_ImageDatabase.GetBGPrefab(new System.Random().Next(0, m_ImageDatabase.GetBGLength())));
+        int seed = new System.Random().Next(0, m_ImageDatabase.GetBGLength());
+
+        m_CurrentBG = Instantiate(m_ImageDatabase.GetBGPrefab(seed));
 
         yield return new WaitForSeconds(bgTime);
 
@@ -80,7 +82,9 @@ public class DisplayController : MonoBehaviour
 
         yield return new WaitForSeconds(personTime);
 
-        m_CurrentPerson = Instantiate(m_ImageDatabase.GetPersonPrefab(new System.Random().Next(0, m_ImageDatabase.GetPersonLength())));
+        int seed = new System.Random().Next(0, m_ImageDatabase.GetPersonLength());
+
+        m_CurrentPerson = Instantiate(m_ImageDatabase.GetPersonPrefab(seed));
     }
 
     private void QuitGame()
