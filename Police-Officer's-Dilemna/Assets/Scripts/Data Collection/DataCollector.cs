@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public enum PersonRace
 {
@@ -27,10 +28,10 @@ public enum ResponseType
 [System.Serializable]
 public class UserResponse
 {
-    private PersonRace m_PersonRace;
+    [SerializeField] private PersonRace m_PersonRace;
     internal PersonRace PersonRace { get => m_PersonRace; }
 
-    private ObjectType m_ObjectType;
+    [SerializeField] private ObjectType m_ObjectType;
     internal ObjectType ObjectType { get => m_ObjectType; }
 
     [SerializeField] private ResponseType m_ResponseType;
@@ -46,9 +47,11 @@ public class UserResponse
     [SerializeField] private bool m_Correct;
     internal bool Correct { get => m_Correct; }
 
-    internal UserResponse(ResponseType responseType, ObjectType objectType)
+    internal UserResponse(ResponseType responseType, PersonRace personRace, ObjectType objectType)
     {
         m_ResponseType = responseType;
+
+        m_PersonRace = personRace;
 
         m_ObjectType = objectType;
 
@@ -66,15 +69,23 @@ public class UserResponse
 [System.Serializable]
 public class UserData
 {
-    [SerializeField] private float m_Score;
-    internal float Score { get => m_Score; }
+    [SerializeField] private int m_Score;
+    internal int Score { get => m_Score; }
 
     [SerializeField] private List<UserResponse> m_Responses;
 
     public void ResetData()
     {
         m_Score = 0;
-        if(m_Responses != null) m_Responses.Clear();
+
+        if (m_Responses != null) 
+        {
+            m_Responses.Clear();
+        }
+        else
+        {
+            m_Responses = new List<UserResponse>();
+        }
     }
 
     internal void AddResponse (UserResponse response)
@@ -96,11 +107,22 @@ public class DataCollector : MonoBehaviour
 {
     [SerializeField] private UserData m_CurrentUserData;
 
+    [SerializeField] private PersonData m_CurrentPersonData;
+
+    public static Action<int> OnScoreChanged;
+
     private void Start()
     {
         m_CurrentUserData = new UserData();
 
         m_CurrentUserData.ResetData();
+
+        DisplayController.OnPersonGenerated += SetPersonData;
+    }
+
+    private void OnDestroy()
+    {
+        DisplayController.OnPersonGenerated -= SetPersonData;
     }
 
     private void Update()
@@ -108,10 +130,15 @@ public class DataCollector : MonoBehaviour
         
     }
 
+    public void SetPersonData(PersonData data)
+    {
+        m_CurrentPersonData = data;
+    }
+
     public void NewResponse(int responseType)
     {
-        ObjectType currentObjectType = ObjectType.Other;
+        m_CurrentUserData.AddResponse(new UserResponse((ResponseType)responseType, m_CurrentPersonData.PersonRace, m_CurrentPersonData.PersonObject));
 
-        m_CurrentUserData.AddResponse(new UserResponse((ResponseType)responseType, currentObjectType));
+        OnScoreChanged?.Invoke(m_CurrentUserData.Score);
     }
 }
