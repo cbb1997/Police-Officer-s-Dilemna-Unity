@@ -535,6 +535,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8178b2ec5afcd5419f7081d72f314e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ScoreUI: {fileID: 1190993187}
+  m_ShootButton: {fileID: 1603059547}
+  m_ClearButton: {fileID: 1491324172}
 --- !u!1 &1190993185
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,7 +595,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score: ##'
+  m_text: 'Score:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -619,7 +622,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.3
+  m_fontSize: 34.5
   m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 1
