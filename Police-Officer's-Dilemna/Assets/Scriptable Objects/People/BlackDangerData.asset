@@ -16,4 +16,4 @@ MonoBehaviour:
   m_ImageRef: {fileID: 0}
   m_PrefabRef: {fileID: 8676975751338712915, guid: 41d645ab139f8b04d80f79c377731b7a, type: 3}
   m_PersonRace: 0
-  m_PersonObject: 0
+  m_PersonObject: 2
