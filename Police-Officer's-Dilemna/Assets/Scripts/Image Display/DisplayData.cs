@@ -10,8 +10,10 @@ public class DisplayData : ScriptableObject
     public float MinImageTime { get => m_MinImageTime; }
     public float MaxImageTime { get => m_MaxImageTime; }
 
-    [SerializeField] private float m_MaxPersonTime;
+    [SerializeField] private float m_MinPersonTime, m_MaxPersonTime;
     public float MaxPersonTime { get => m_MaxPersonTime; }
+    public float MinPersonTime { get => m_MinPersonTime; }
+
 
     [SerializeField] private float m_DisplayDelay;
     public float DisplayDelay { get => m_DisplayDelay; }

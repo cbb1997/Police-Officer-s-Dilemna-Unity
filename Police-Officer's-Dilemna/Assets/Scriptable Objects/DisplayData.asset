@@ -16,4 +16,4 @@ MonoBehaviour:
   m_MaxImageTime: 2
   m_MaxPersonTime: 1.5
   m_DisplayDelay: 0.5
-  m_PersonDisplayRate: 0.5
+  m_PersonDisplayRate: 0
