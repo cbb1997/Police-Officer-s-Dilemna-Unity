@@ -111,6 +111,8 @@ public class DataCollector : MonoBehaviour
 
     public static Action<int> OnScoreChanged;
 
+    private bool m_Responded = true;
+
     private void Start()
     {
         m_CurrentUserData = new UserData();
@@ -127,12 +129,30 @@ public class DataCollector : MonoBehaviour
 
     private void Update()
     {
-        
+        if (m_Responded) return;
+
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            NewResponse(2);
+            m_Responded = true;
+        }
+        else if (Input.GetAxis("Horizontal") > 0)
+        {
+            NewResponse(1);
+            m_Responded = true;
+        }
     }
 
     public void SetPersonData(PersonData data)
     {
         m_CurrentPersonData = data;
+        
+        if(!m_Responded)
+        {
+            NewResponse(0);
+        }
+
+        m_Responded = false;
     }
 
     public void NewResponse(int responseType)

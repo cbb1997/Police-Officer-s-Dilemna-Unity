@@ -18,6 +18,8 @@ public class HUD : MonoBehaviour
 
         m_BaseScoreText = m_ScoreUI.text;
 
+        UpdateScoreText(0);
+
         DataCollector.OnScoreChanged += UpdateScoreText;
 
         DisplayController.OnPersonGenerated += (imageData) => SetButtonEnabled(true);

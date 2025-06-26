@@ -16,6 +16,9 @@ public class DisplayData : ScriptableObject
     [SerializeField] private float m_DisplayDelay;
     public float DisplayDelay { get => m_DisplayDelay; }
 
+    [SerializeField] private float m_PersonDisplayRate;
+    public float PersonDisplayRate { get => m_PersonDisplayRate; }
+
     private void Awake()
     {
         

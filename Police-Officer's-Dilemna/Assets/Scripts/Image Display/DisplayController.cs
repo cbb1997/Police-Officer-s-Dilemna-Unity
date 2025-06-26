@@ -53,10 +53,19 @@ public class DisplayController : MonoBehaviour
         m_CurrentGenerationTime = UnityEngine.Random.Range(m_DisplayData.MinImageTime, m_DisplayData.MaxImageTime);
         StartCoroutine(GenerateBG(m_CurrentGenerationTime));
 
+        Debug.Log($"BG Display Time: {m_CurrentGenerationTime}");
+
         float maxTime = m_CurrentGenerationTime + (m_DisplayData.MaxPersonTime - m_DisplayData.MaxImageTime);
 
-        m_CurrentGenerationTime = UnityEngine.Random.Range(m_DisplayData.MinImageTime, maxTime);
-        StartCoroutine(GeneratePerson(m_CurrentGenerationTime));
+        Debug.Log($"Person Max Display Time: {m_CurrentGenerationTime}");
+
+        if (UnityEngine.Random.Range(0.0f, 1.0f) >= m_DisplayData.PersonDisplayRate)
+        {
+            m_CurrentGenerationTime = UnityEngine.Random.Range(m_DisplayData.MinImageTime, maxTime);
+            StartCoroutine(GeneratePerson(m_CurrentGenerationTime));
+
+            Debug.Log($"Person Display Time: {m_CurrentGenerationTime}");
+        }
 
         m_ScreenFilter.SetActive(false);
     }
