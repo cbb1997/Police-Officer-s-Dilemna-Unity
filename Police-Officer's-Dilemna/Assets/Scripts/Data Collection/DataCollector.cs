@@ -109,6 +109,8 @@ public class DataCollector : MonoBehaviour
 
     [SerializeField] private PersonData m_CurrentPersonData;
 
+    public static Action<ResponseType> OnUserResponse;
+
     public static Action<int> OnScoreChanged;
 
     private bool m_Responded = true;
@@ -158,6 +160,8 @@ public class DataCollector : MonoBehaviour
     public void NewResponse(int responseType)
     {
         m_CurrentUserData.AddResponse(new UserResponse((ResponseType)responseType, m_CurrentPersonData.PersonRace, m_CurrentPersonData.PersonObject));
+
+        OnUserResponse?.Invoke((ResponseType)responseType);
 
         OnScoreChanged?.Invoke(m_CurrentUserData.Score);
     }
