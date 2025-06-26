@@ -88,7 +88,7 @@ public class UserData
         }
     }
 
-    internal void AddResponse (UserResponse response)
+    internal UserResponse AddResponse (UserResponse response)
     {
         if (response.Correct) 
         { 
@@ -100,6 +100,8 @@ public class UserData
         }
 
         m_Responses.Add(response);
+
+        return response;
     }
 }
 
@@ -109,7 +111,7 @@ public class DataCollector : MonoBehaviour
 
     [SerializeField] private PersonData m_CurrentPersonData;
 
-    public static Action<ResponseType> OnUserResponse;
+    public static Action<UserResponse> OnUserResponse;
 
     public static Action<int> OnScoreChanged;
 
@@ -159,9 +161,7 @@ public class DataCollector : MonoBehaviour
 
     public void NewResponse(int responseType)
     {
-        m_CurrentUserData.AddResponse(new UserResponse((ResponseType)responseType, m_CurrentPersonData.PersonRace, m_CurrentPersonData.PersonObject));
-
-        OnUserResponse?.Invoke((ResponseType)responseType);
+        OnUserResponse?.Invoke(m_CurrentUserData.AddResponse(new UserResponse((ResponseType)responseType, m_CurrentPersonData.PersonRace, m_CurrentPersonData.PersonObject)));
 
         OnScoreChanged?.Invoke(m_CurrentUserData.Score);
     }

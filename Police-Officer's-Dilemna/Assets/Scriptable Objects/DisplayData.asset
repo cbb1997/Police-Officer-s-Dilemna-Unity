@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe72471134f12345a8ec2745f6079b0, type: 3}
   m_Name: DisplayData
   m_EditorClassIdentifier: 
-  m_MinImageTime: 0.5
-  m_MaxImageTime: 1
-  m_MinPersonTime: 0
-  m_MaxPersonTime: 0.4
-  m_DisplayDelay: 0.5
-  m_PersonDisplayRate: 0
+  m_MinImageTime: 1
+  m_MaxImageTime: 2
+  m_MinPersonTime: 0.2
+  m_MaxPersonTime: 1.5
+  m_DisplayDelay: 0.75
+  m_PersonDisplayRate: 0.5
