@@ -6,7 +6,7 @@ using TMPro;
 
 public class HUD : MonoBehaviour
 {
-    [SerializeField] private TMP_Text m_ScoreUI;
+    [SerializeField] private TMP_Text m_ScoreUI, m_FeedbackUI;
 
     [SerializeField] private Button m_ShootButton, m_ClearButton;
 
@@ -17,10 +17,10 @@ public class HUD : MonoBehaviour
         SetButtonEnabled(false);
 
         m_BaseScoreText = m_ScoreUI.text;
-
         UpdateScoreText(0);
 
         DataCollector.OnScoreChanged += UpdateScoreText;
+        DataCollector.OnUserResponse += UpdateVisuals;
 
         DisplayController.OnPersonGenerated += (imageData) => SetButtonEnabled(true);
     }
@@ -30,6 +30,11 @@ public class HUD : MonoBehaviour
         m_ScoreUI.text = $"{m_BaseScoreText} {score}";
 
         SetButtonEnabled(false);
+    }
+
+    private void UpdateVisuals(UserResponse response)
+    {
+
     }
 
     private void SetButtonEnabled(bool enabled)

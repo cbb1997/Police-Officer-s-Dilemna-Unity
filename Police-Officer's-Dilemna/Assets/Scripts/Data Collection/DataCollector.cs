@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using System;
 
+#region Categorical Variables
+
 public enum PersonRace
 {
     Black = 1,
@@ -34,6 +36,10 @@ public enum DominantHand
     Ambidextrous = 3,
     Other = 0
 }
+
+#endregion
+
+#region User Response
 
 [System.Serializable]
 public class UserResponse
@@ -85,6 +91,10 @@ public class UserResponse
         }
     }
 }
+
+#endregion
+
+#region User Data
 
 [System.Serializable]
 public class UserData
@@ -178,9 +188,16 @@ public class UserData
     }
 }
 
+#endregion
+
+#region Data Collector
+
 public class DataCollector : MonoBehaviour
 {
     [SerializeField] private UserData m_CurrentUserData;
+
+    [SerializeField] private PersonData m_DefaultPersonData;
+    [SerializeField] private BGData m_DefaultBGData;
 
     [ReadOnly][SerializeField] private PersonData m_CurrentPersonData;
     [ReadOnly][SerializeField] private BGData m_CurrentBGData;
@@ -217,7 +234,7 @@ public class DataCollector : MonoBehaviour
 
         m_Responded = inputX != 0;
 
-        if (m_Responded && m_CurrentPersonData == null)
+        if (m_Responded && m_CurrentPersonData == m_DefaultPersonData)
         {
             NewResponse(ResponseType.EarlyResponse);
             return;
@@ -242,7 +259,7 @@ public class DataCollector : MonoBehaviour
             NewResponse(ResponseType.NoResponse);
         }
 
-        m_CurrentPersonData = null;
+        m_CurrentPersonData = m_DefaultPersonData;
         m_Responded = false;
     }
 
@@ -270,3 +287,5 @@ public class DataCollector : MonoBehaviour
         OnScoreChanged?.Invoke(m_CurrentUserData.Score);
     }
 }
+
+#endregion
