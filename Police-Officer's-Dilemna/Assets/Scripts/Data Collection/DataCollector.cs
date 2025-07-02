@@ -28,30 +28,33 @@ public enum ResponseType
 [System.Serializable]
 public class UserResponse
 {
-    [ReadOnly] [SerializeField] private PersonRace m_PersonRace;
+    [ReadOnly][SerializeField] private PersonRace m_PersonRace;
     internal PersonRace PersonRace { get => m_PersonRace; }
 
-    [ReadOnly] [SerializeField] private ObjectType m_ObjectType;
+    [ReadOnly][SerializeField] private ObjectType m_ObjectType;
     internal ObjectType ObjectType { get => m_ObjectType; }
 
-    [ReadOnly] [SerializeField] private ResponseType m_ResponseType;
+    [ReadOnly][SerializeField] private ResponseType m_ResponseType;
     internal ResponseType ResponseType { get => m_ResponseType; }
 
-    [ReadOnly] [SerializeField] private string m_BGName, m_PersonName;
+    [ReadOnly][SerializeField] private string m_BGName, m_PersonName;
     internal string BGName { get => m_BGName; }
     internal string PersonName { get => m_PersonName; }
 
-    [ReadOnly] [SerializeField] private int m_CurrentScore;
+    [ReadOnly][SerializeField] private Vector2 m_PersonDisplayPosition;
+    internal Vector2 PersonDisplayPos { get => m_PersonDisplayPosition; }
+
+    [ReadOnly][SerializeField] private int m_CurrentScore;
     internal int CurrentScore { set => m_CurrentScore = value; }
 
-    [ReadOnly] [SerializeField] private float m_ResponseTime;
+    [ReadOnly][SerializeField] private float m_ResponseTime;
     internal float ResponseTime { get => m_ResponseTime; }
 
-    [ReadOnly] [SerializeField] private float m_BGTime, m_PersonTime;
+    [ReadOnly][SerializeField] private float m_BGTime, m_PersonTime;
     internal float BGTime { get => m_BGTime; }
     internal float PersonTime { get => m_PersonTime; }
 
-    [ReadOnly] [SerializeField] private bool m_Correct;
+    [ReadOnly][SerializeField] private bool m_Correct;
     internal bool Correct { get => m_Correct; }
 
     internal UserResponse(ResponseType responseType, PersonRace personRace, ObjectType objectType)
