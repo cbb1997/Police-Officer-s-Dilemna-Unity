@@ -6,32 +6,33 @@ using System;
 
 public enum PersonRace
 {
-    Black,
-    White,
-    Other
+    Black = 1,
+    White = 2,
+    Other = 0
 }
 
 public enum ObjectType
 {
     Innocuous = 1,
     Shoot = 2,
-    Other = 3
+    Other = 0
 }
 
 public enum ResponseType
 {
     Clear = 1,
     Shoot = 2,
-    NoResponse = 0,
-    Other = 3
+    NoResponse = 3,
+    EarlyResponse = 4,
+    Other = 0
 }
 
 public enum DominantHand
 {
     Left = 1,
     Right = 2,
-    Ambidextrous = 0,
-    Other = 3
+    Ambidextrous = 3,
+    Other = 0
 }
 
 [System.Serializable]
@@ -93,6 +94,16 @@ public class UserData
 
     [ReadOnly][SerializeField] private DominantHand m_UserDominantHand;
     internal DominantHand UserDominantHand { get => m_UserDominantHand; set => m_UserDominantHand = value; }
+    internal DominantHand NonDominantHand
+    {
+        get
+        {
+            if (m_UserDominantHand == DominantHand.Left) return DominantHand.Right;
+            else if (m_UserDominantHand == DominantHand.Right) return DominantHand.Left;
+            
+            return DominantHand.Other;
+        }
+    }
 
     [SerializeField] private List<UserResponse> m_Responses;
 
@@ -134,6 +145,7 @@ public class UserData
                     break;
 
                 case ResponseType.NoResponse:
+                case ResponseType.EarlyResponse:
                     break;
 
                 default:
@@ -153,6 +165,7 @@ public class UserData
                     break;
 
                 case ResponseType.NoResponse:
+                case ResponseType.EarlyResponse:
                     m_Score -= 10;
                     break;
 
@@ -169,7 +182,8 @@ public class DataCollector : MonoBehaviour
 {
     [SerializeField] private UserData m_CurrentUserData;
 
-    [SerializeField] private PersonData m_CurrentPersonData;
+    [ReadOnly][SerializeField] private PersonData m_CurrentPersonData;
+    [ReadOnly][SerializeField] private BGData m_CurrentBGData;
 
     public static Action<UserResponse> OnUserResponse;
 
@@ -183,8 +197,10 @@ public class DataCollector : MonoBehaviour
 
         m_CurrentUserData.ResetData();
 
+        DisplayController.OnBGGenerated += SetBGData;
         DisplayController.OnPersonGenerated += SetPersonData;
 
+        SetDominantHand(0);
         FindObjectOfType<TMP_Dropdown>().onValueChanged.AddListener(SetDominantHand);
     }
 
@@ -199,38 +215,57 @@ public class DataCollector : MonoBehaviour
 
         float inputX = Input.GetAxis("Horizontal");
 
+        m_Responded = inputX != 0;
+
+        if (m_Responded && m_CurrentPersonData == null)
+        {
+            NewResponse(ResponseType.EarlyResponse);
+            return;
+        }
+
         if (inputX < 0)
         {
             NewResponse((int) m_CurrentUserData.UserDominantHand);
-            m_Responded = true;
         }
         else if (inputX > 0)
         {
-            NewResponse(1);
-            m_Responded = true;
+            NewResponse((int) m_CurrentUserData.NonDominantHand);
         }
     }
 
-    public void SetPersonData(PersonData data)
+    private void SetBGData (BGData data)
     {
-        m_CurrentPersonData = data;
+        m_CurrentBGData = data;
         
-        if(!m_Responded)
+        if (!m_Responded && m_CurrentPersonData != null)
         {
-            NewResponse(0);
+            NewResponse(ResponseType.NoResponse);
         }
 
+        m_CurrentPersonData = null;
         m_Responded = false;
+    }
+
+    private void SetPersonData(PersonData data)
+    {
+        m_CurrentPersonData = data;
     }
 
     public void SetDominantHand (int hand)
     {
-        m_CurrentUserData.UserDominantHand = (DominantHand)hand;
+        m_CurrentUserData.UserDominantHand = (DominantHand)hand + 1;
     }
 
     public void NewResponse(int responseType)
     {
         OnUserResponse?.Invoke(m_CurrentUserData.AddResponse(new UserResponse((ResponseType)responseType, m_CurrentPersonData.PersonRace, m_CurrentPersonData.PersonObject)));
+
+        OnScoreChanged?.Invoke(m_CurrentUserData.Score);
+    }
+
+    public void NewResponse(ResponseType responseType)
+    {
+        OnUserResponse?.Invoke(m_CurrentUserData.AddResponse(new UserResponse(responseType, m_CurrentPersonData.PersonRace, m_CurrentPersonData.PersonObject)));
 
         OnScoreChanged?.Invoke(m_CurrentUserData.Score);
     }

@@ -10,12 +10,12 @@ public class DisplayController : MonoBehaviour
 
     [SerializeField] private GameObject m_ScreenFilter;
 
+    public static Action<BGData> OnBGGenerated;
     public static Action<PersonData> OnPersonGenerated;
 
     private ImageDatabase m_ImageDatabase;
 
     private float m_CurrentGenerationTime;
-
     private Vector2 m_CurrentImagePos;
 
     private GameObject m_CurrentPerson, m_CurrentBG;
@@ -76,8 +76,9 @@ public class DisplayController : MonoBehaviour
     {
         int seed = new System.Random().Next(0, m_ImageDatabase.GetBGLength());
 
-        m_CurrentBG = Instantiate(m_ImageDatabase.GetBGPrefab(seed));
+        OnBGGenerated?.Invoke(m_ImageDatabase.GetBGData(seed));
 
+        m_CurrentBG = Instantiate(m_ImageDatabase.GetBGPrefab(seed));
         m_CurrentImagePos = m_ImageDatabase.GetBGData(seed).GetDisplayPosition();
 
         yield return new WaitForSeconds(bgTime);
@@ -96,10 +97,10 @@ public class DisplayController : MonoBehaviour
         Destroy(m_CurrentPerson);
 
         int seed = new System.Random().Next(0, m_ImageDatabase.GetPersonLength());
+
+        yield return new WaitForSeconds(personTime);
+
         OnPersonGenerated?.Invoke(m_ImageDatabase.GetPersonData(seed));
-
-        yield return new WaitForSeconds(personTime);       
-
         m_CurrentPerson = Instantiate(m_ImageDatabase.GetPersonPrefab(seed), m_CurrentImagePos, Quaternion.identity);
     }
 
