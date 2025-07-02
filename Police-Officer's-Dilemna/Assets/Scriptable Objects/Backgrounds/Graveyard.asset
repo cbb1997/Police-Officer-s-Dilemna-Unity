@@ -15,3 +15,7 @@ MonoBehaviour:
   m_ImageName: 
   m_ImageRef: {fileID: 0}
   m_PrefabRef: {fileID: 3099681440810600887, guid: 19442a92c75d8244a8b91f2f03b36ea0, type: 3}
+  m_DisplayPositions:
+  - {x: 2.2, y: -1.75}
+  - {x: -1, y: 0}
+  - {x: -4, y: -1.75}

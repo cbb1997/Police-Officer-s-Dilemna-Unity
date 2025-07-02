@@ -28,6 +28,11 @@ public class ImageDatabase : MonoBehaviour
         return m_PersonDatabase[i];
     }
 
+    public BGData GetBGData(int i)
+    {
+        return m_BGDatabase[i];
+    }
+
     public GameObject GetPersonPrefab(int i)
     {
         return m_PersonDatabase[i].Prefab;

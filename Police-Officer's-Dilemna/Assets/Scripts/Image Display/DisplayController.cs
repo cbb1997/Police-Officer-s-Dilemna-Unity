@@ -16,6 +16,8 @@ public class DisplayController : MonoBehaviour
 
     private float m_CurrentGenerationTime;
 
+    private Vector2 m_CurrentImagePos;
+
     private GameObject m_CurrentPerson, m_CurrentBG;
 
     private void Start()
@@ -53,18 +55,18 @@ public class DisplayController : MonoBehaviour
         m_CurrentGenerationTime = UnityEngine.Random.Range(m_DisplayData.MinImageTime, m_DisplayData.MaxImageTime);
         StartCoroutine(GenerateBG(m_CurrentGenerationTime));
 
-        Debug.Log($"BG Display Time: {m_CurrentGenerationTime}");
+        //Debug.Log($"BG Display Time: {m_CurrentGenerationTime}");
 
         float maxTime = m_CurrentGenerationTime + (m_DisplayData.MaxPersonTime - m_DisplayData.MaxImageTime);
 
-        Debug.Log($"Person Max Display Time: {maxTime}");
+        //Debug.Log($"Person Max Display Time: {maxTime}");
 
         if (UnityEngine.Random.Range(0.0f, 1.0f) <= m_DisplayData.PersonDisplayRate)
         {
             m_CurrentGenerationTime = UnityEngine.Random.Range(m_DisplayData.MinPersonTime, maxTime);
             StartCoroutine(GeneratePerson(m_CurrentGenerationTime));
 
-            Debug.Log($"Person Display Time: {m_CurrentGenerationTime}");
+            //Debug.Log($"Person Display Time: {m_CurrentGenerationTime}");
         }
 
         m_ScreenFilter.SetActive(false);
@@ -75,6 +77,8 @@ public class DisplayController : MonoBehaviour
         int seed = new System.Random().Next(0, m_ImageDatabase.GetBGLength());
 
         m_CurrentBG = Instantiate(m_ImageDatabase.GetBGPrefab(seed));
+
+        m_CurrentImagePos = m_ImageDatabase.GetBGData(seed).GetDisplayPosition();
 
         yield return new WaitForSeconds(bgTime);
 
@@ -96,7 +100,7 @@ public class DisplayController : MonoBehaviour
 
         yield return new WaitForSeconds(personTime);       
 
-        m_CurrentPerson = Instantiate(m_ImageDatabase.GetPersonPrefab(seed));
+        m_CurrentPerson = Instantiate(m_ImageDatabase.GetPersonPrefab(seed), m_CurrentImagePos, Quaternion.identity);
     }
 
     private void QuitGame()
