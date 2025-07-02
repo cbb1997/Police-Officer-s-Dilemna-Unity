@@ -25,6 +25,14 @@ public enum ResponseType
     Other = 3
 }
 
+public enum DominantHand
+{
+    Left,
+    Right,
+    Ambidextrous,
+    Other
+}
+
 [System.Serializable]
 public class UserResponse
 {
