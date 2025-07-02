@@ -6,7 +6,7 @@ public class UserSFX : MonoBehaviour
 {
     [SerializeField] private AudioClip m_ShootSFX, m_ClearSFX;
 
-    [SerializeField] private AudioClip m_CorrectSFX, m_InCorrectSFX;
+    [SerializeField] private AudioClip m_CorrectSFX, m_IncorrectSFX, m_MissSFX;
 
 
     [SerializeField] private float m_SFXVolume;
@@ -46,7 +46,16 @@ public class UserSFX : MonoBehaviour
                 break;
             
             case false:
-                AudioController.PlaySFX(m_InCorrectSFX, m_SFXVolume);
+
+                if (response.ResponseType == ResponseType.NoResponse)
+                {
+                    AudioController.PlaySFX(m_MissSFX, m_SFXVolume);
+                }
+                else
+                {
+                    AudioController.PlaySFX(m_IncorrectSFX, m_SFXVolume);
+                }
+
                 break;
             
             default:

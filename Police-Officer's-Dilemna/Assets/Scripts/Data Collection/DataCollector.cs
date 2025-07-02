@@ -28,30 +28,30 @@ public enum ResponseType
 [System.Serializable]
 public class UserResponse
 {
-    [SerializeField] private PersonRace m_PersonRace;
+    [ReadOnly] [SerializeField] private PersonRace m_PersonRace;
     internal PersonRace PersonRace { get => m_PersonRace; }
 
-    [SerializeField] private ObjectType m_ObjectType;
+    [ReadOnly] [SerializeField] private ObjectType m_ObjectType;
     internal ObjectType ObjectType { get => m_ObjectType; }
 
-    [SerializeField] private ResponseType m_ResponseType;
+    [ReadOnly] [SerializeField] private ResponseType m_ResponseType;
     internal ResponseType ResponseType { get => m_ResponseType; }
 
-    [SerializeField] private string m_BGName, m_PersonName;
+    [ReadOnly] [SerializeField] private string m_BGName, m_PersonName;
     internal string BGName { get => m_BGName; }
     internal string PersonName { get => m_PersonName; }
 
-    [SerializeField] private int m_CurrentScore;
+    [ReadOnly] [SerializeField] private int m_CurrentScore;
     internal int CurrentScore { set => m_CurrentScore = value; }
 
-    [SerializeField] private float m_ResponseTime;
+    [ReadOnly] [SerializeField] private float m_ResponseTime;
     internal float ResponseTime { get => m_ResponseTime; }
 
-    [SerializeField] private float m_BGTime, m_PersonTime;
+    [ReadOnly] [SerializeField] private float m_BGTime, m_PersonTime;
     internal float BGTime { get => m_BGTime; }
     internal float PersonTime { get => m_PersonTime; }
 
-    [SerializeField] private bool m_Correct;
+    [ReadOnly] [SerializeField] private bool m_Correct;
     internal bool Correct { get => m_Correct; }
 
     internal UserResponse(ResponseType responseType, PersonRace personRace, ObjectType objectType)
@@ -76,7 +76,7 @@ public class UserResponse
 [System.Serializable]
 public class UserData
 {
-    [SerializeField] private int m_Score;
+    [ReadOnly] [SerializeField] private int m_Score;
     internal int Score { get => m_Score; }
 
     [SerializeField] private List<UserResponse> m_Responses;
