@@ -10,6 +10,8 @@ public class HUD : MonoBehaviour
 
     [SerializeField] private Button m_ShootButton, m_ClearButton;
 
+    [SerializeField] private float m_TextFadeTime;
+
     private string m_BaseScoreText;
 
     private void Start()
@@ -34,7 +36,46 @@ public class HUD : MonoBehaviour
 
     private void UpdateVisuals(UserResponse response)
     {
+        if (response.Correct)
+        {
+            m_FeedbackUI.text = "Correct!";
+            return;
+        }
 
+        switch (response.ResponseType)
+        {
+            case ResponseType.Shoot:
+                m_FeedbackUI.text = "False Alarm!";
+                break;
+
+            case ResponseType.Clear:
+                m_FeedbackUI.text = "Miss!";
+                break;
+
+            case ResponseType.NoResponse:
+                m_FeedbackUI.text = "Too Late!";
+                break;
+
+            case ResponseType.EarlyResponse:
+                m_FeedbackUI.text = "Too Early!";
+                break;
+
+            case ResponseType.Other:
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void FadeOutText (TMP_Text textUI)
+    {
+        StartCoroutine(SetTextOpacity(textUI, 1.0f, 0, m_TextFadeTime));
+    }
+
+    private IEnumerator SetTextOpacity(TMP_Text textUI, float startingOpacity, float endingOpacity, float seconds)
+    {
+        yield return null;
     }
 
     private void SetButtonEnabled(bool enabled)

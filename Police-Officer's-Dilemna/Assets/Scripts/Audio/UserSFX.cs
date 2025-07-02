@@ -29,6 +29,7 @@ public class UserSFX : MonoBehaviour
                 break;
 
             case ResponseType.NoResponse:
+            case ResponseType.EarlyResponse:
                 break;
 
             case ResponseType.Other:
@@ -46,16 +47,25 @@ public class UserSFX : MonoBehaviour
                 break;
             
             case false:
-
-                if (response.ResponseType == ResponseType.NoResponse)
+                switch(response.ResponseType)
                 {
-                    AudioController.PlaySFX(m_MissSFX, m_SFXVolume);
-                }
-                else
-                {
-                    AudioController.PlaySFX(m_IncorrectSFX, m_SFXVolume);
-                }
+                    case ResponseType.Shoot:
+                    case ResponseType.Clear:
+                        AudioController.PlaySFX(m_IncorrectSFX, m_SFXVolume);
+                        break;
 
+                    case ResponseType.NoResponse:
+                    case ResponseType.EarlyResponse:
+                        AudioController.PlaySFX(m_MissSFX, m_SFXVolume);
+                        break;
+
+                    case ResponseType.Other:
+                        break;
+
+                    default:
+                        break;
+                } 
+                
                 break;
             
             default:
