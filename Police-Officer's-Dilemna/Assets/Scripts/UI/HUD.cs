@@ -36,46 +36,83 @@ public class HUD : MonoBehaviour
 
     private void UpdateVisuals(UserResponse response)
     {
+        SetTextOpacity(m_FeedbackUI, 0);
+
         if (response.Correct)
         {
-            m_FeedbackUI.text = "Correct!";
-            return;
-        }
+            switch (response.ResponseType)
+            {
+                case ResponseType.Shoot:
+                    m_FeedbackUI.text = "Correct Hit!";
+                    break;
 
-        switch (response.ResponseType)
+                case ResponseType.Clear:
+                    m_FeedbackUI.text = "Correct Clear!";
+                    break;
+
+                case ResponseType.NoResponse:
+                case ResponseType.EarlyResponse:
+                case ResponseType.Other:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        else
         {
-            case ResponseType.Shoot:
-                m_FeedbackUI.text = "False Alarm!";
-                break;
+            switch (response.ResponseType)
+            {
+                case ResponseType.Shoot:
+                    m_FeedbackUI.text = "False Alarm!";
+                    break;
 
-            case ResponseType.Clear:
-                m_FeedbackUI.text = "Miss!";
-                break;
+                case ResponseType.Clear:
+                    m_FeedbackUI.text = "Miss!";
+                    break;
 
-            case ResponseType.NoResponse:
-                m_FeedbackUI.text = "Too Late!";
-                break;
+                case ResponseType.NoResponse:
+                    m_FeedbackUI.text = "Too Late!";
+                    break;
 
-            case ResponseType.EarlyResponse:
-                m_FeedbackUI.text = "Too Early!";
-                break;
+                case ResponseType.EarlyResponse:
+                    m_FeedbackUI.text = "Too Early!";
+                    break;
 
-            case ResponseType.Other:
-                break;
+                case ResponseType.Other:
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
         }
+
+        FadeOutText(m_FeedbackUI);
     }
 
-    private void FadeOutText (TMP_Text textUI)
+    private void FadeOutText(TMP_Text textUI)
     {
-        StartCoroutine(SetTextOpacity(textUI, 1.0f, 0, m_TextFadeTime));
+        StartCoroutine(TextFade(textUI, 1.0f, 0, m_TextFadeTime));
     }
 
-    private IEnumerator SetTextOpacity(TMP_Text textUI, float startingOpacity, float endingOpacity, float seconds)
+    private IEnumerator TextFade(TMP_Text textUI, float startingOpacity, float endingOpacity, float duration)
     {
-        yield return null;
+        SetTextOpacity(textUI, startingOpacity);
+
+        float time = 0f;
+        while (time < duration)
+        {
+            SetTextOpacity(textUI, Mathf.Lerp(startingOpacity, endingOpacity, time / duration));
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        SetTextOpacity(textUI, endingOpacity);
+    }
+
+    private void SetTextOpacity(TMP_Text textUI, float alpha)
+    {
+        textUI.color = new Color(textUI.color.r, textUI.color.g, textUI.color.b, alpha);
     }
 
     private void SetButtonEnabled(bool enabled)
