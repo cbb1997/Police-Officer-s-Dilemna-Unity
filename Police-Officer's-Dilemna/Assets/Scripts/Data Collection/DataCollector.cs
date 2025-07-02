@@ -37,10 +37,17 @@ public class UserResponse
     [SerializeField] private ResponseType m_ResponseType;
     internal ResponseType ResponseType { get => m_ResponseType; }
 
-    private float m_ResponseTime;
+    [SerializeField] private string m_BGName, m_PersonName;
+    internal string BGName { get => m_BGName; }
+    internal string PersonName { get => m_PersonName; }
+
+    [SerializeField] private int m_CurrentScore;
+    internal int CurrentScore { set => m_CurrentScore = value; }
+
+    [SerializeField] private float m_ResponseTime;
     internal float ResponseTime { get => m_ResponseTime; }
 
-    private float m_BGTime, m_PersonTime;
+    [SerializeField] private float m_BGTime, m_PersonTime;
     internal float BGTime { get => m_BGTime; }
     internal float PersonTime { get => m_PersonTime; }
 
@@ -90,18 +97,56 @@ public class UserData
 
     internal UserResponse AddResponse (UserResponse response)
     {
-        if (response.Correct) 
-        { 
-            m_Score++; 
-        }
-        else
-        {
-            m_Score--;
-        }
+        UpdatePoints(response);
 
         m_Responses.Add(response);
 
         return response;
+    }
+
+    private void UpdatePoints(UserResponse response)
+    {
+        if (response.Correct)
+        {
+            switch (response.ResponseType)
+            {
+                case ResponseType.Shoot:
+                    m_Score += 10;
+                    break;
+
+                case ResponseType.Clear:
+                    m_Score += 5;
+                    break;
+
+                case ResponseType.NoResponse:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            switch (response.ResponseType)
+            {
+                case ResponseType.Shoot:
+                    m_Score -= 20;
+                    break;
+
+                case ResponseType.Clear:
+                    m_Score -= 40;
+                    break;
+
+                case ResponseType.NoResponse:
+                    m_Score -= 10;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        response.CurrentScore = m_Score;
     }
 }
 
