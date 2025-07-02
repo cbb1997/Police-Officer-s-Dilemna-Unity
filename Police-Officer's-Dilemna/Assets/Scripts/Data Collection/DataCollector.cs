@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using System;
 
 public enum PersonRace
@@ -12,25 +13,25 @@ public enum PersonRace
 
 public enum ObjectType
 {
-    Weapon = 2,
     Innocuous = 1,
+    Shoot = 2,
     Other = 3
 }
 
 public enum ResponseType
 {
-    Shoot = 2,
     Clear = 1,
+    Shoot = 2,
     NoResponse = 0,
     Other = 3
 }
 
 public enum DominantHand
 {
-    Left,
-    Right,
-    Ambidextrous,
-    Other
+    Left = 1,
+    Right = 2,
+    Ambidextrous = 0,
+    Other = 3
 }
 
 [System.Serializable]
@@ -87,8 +88,11 @@ public class UserResponse
 [System.Serializable]
 public class UserData
 {
-    [ReadOnly] [SerializeField] private int m_Score;
+    [ReadOnly][SerializeField] private int m_Score;
     internal int Score { get => m_Score; }
+
+    [ReadOnly][SerializeField] private DominantHand m_UserDominantHand;
+    internal DominantHand UserDominantHand { get => m_UserDominantHand; set => m_UserDominantHand = value; }
 
     [SerializeField] private List<UserResponse> m_Responses;
 
@@ -180,6 +184,8 @@ public class DataCollector : MonoBehaviour
         m_CurrentUserData.ResetData();
 
         DisplayController.OnPersonGenerated += SetPersonData;
+
+        FindObjectOfType<TMP_Dropdown>().onValueChanged.AddListener(SetDominantHand);
     }
 
     private void OnDestroy()
@@ -191,12 +197,14 @@ public class DataCollector : MonoBehaviour
     {
         if (m_Responded) return;
 
-        if (Input.GetAxis("Horizontal") < 0)
+        float inputX = Input.GetAxis("Horizontal");
+
+        if (inputX < 0)
         {
-            NewResponse(2);
+            NewResponse((int) m_CurrentUserData.UserDominantHand);
             m_Responded = true;
         }
-        else if (Input.GetAxis("Horizontal") > 0)
+        else if (inputX > 0)
         {
             NewResponse(1);
             m_Responded = true;
@@ -213,6 +221,11 @@ public class DataCollector : MonoBehaviour
         }
 
         m_Responded = false;
+    }
+
+    public void SetDominantHand (int hand)
+    {
+        m_CurrentUserData.UserDominantHand = (DominantHand)hand;
     }
 
     public void NewResponse(int responseType)
