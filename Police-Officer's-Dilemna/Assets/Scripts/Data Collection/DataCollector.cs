@@ -93,6 +93,36 @@ public class UserResponse
             m_Correct = false;
         }
     }
+
+    internal UserResponse(ResponseType responseType, PersonRace personRace, ObjectType objectType, 
+        string bgName, string personName,
+        Vector2 displayPos, int bgGenerated,
+        float responseTime, float bgTime, float personTime,
+        bool correct)
+    {
+        m_ResponseType = responseType;
+        m_PersonRace = personRace;
+        m_ObjectType = objectType;
+
+        m_BGName = bgName;
+        m_PersonName = personName;
+
+        m_PersonDisplayPosition = new Vector2(displayPos.x, displayPos.y);
+        m_NumBGGenerated = bgGenerated;
+
+        m_ResponseTime = responseTime;
+        m_BGTime = bgTime;
+        m_PersonTime = personTime;
+
+        if ((int)(m_ObjectType) == (int)(m_ResponseType))
+        {
+            m_Correct = true;
+        }
+        else
+        {
+            m_Correct = false;
+        }
+    }
 }
 
 #endregion
@@ -209,6 +239,8 @@ public class DataCollector : MonoBehaviour
 
     public static Action<int> OnScoreChanged;
 
+    private float m_CurrentResponseTime;
+
     private bool m_Responded = true;
 
     private void Start()
@@ -240,6 +272,8 @@ public class DataCollector : MonoBehaviour
 
         m_Responded = inputX != 0;
 
+        m_CurrentResponseTime += Time.deltaTime;
+
         if (m_Responded && m_CurrentPersonData == m_DefaultPersonData)
         {
             NewResponse(ResponseType.EarlyResponse);
@@ -256,12 +290,18 @@ public class DataCollector : MonoBehaviour
         }
     }
 
+    private void ResetReponse()
+    {
+        m_CurrentPersonData = m_DefaultPersonData;
+        m_CurrentResponseTime = 0;
+        m_Responded = false;
+    }
+
     private void SetBGData(BGData data)
     {
         m_CurrentBGData = data;
 
-        m_CurrentPersonData = m_DefaultPersonData;
-        m_Responded = false;
+        ResetReponse();
     }
 
     private void SetPersonData(PersonData data)

@@ -8,6 +8,8 @@ public class ImageDatabase : MonoBehaviour
 
     [SerializeField] private BGData[] m_BGDatabase;
 
+    //private List<int> m_BGPool, m_PersonPool;
+
     private void Start()
     {
         
