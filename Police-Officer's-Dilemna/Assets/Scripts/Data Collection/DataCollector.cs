@@ -63,6 +63,9 @@ public class UserResponse
     [ReadOnly][SerializeField] private int m_CurrentScore;
     internal int CurrentScore { set => m_CurrentScore = value; }
 
+    [ReadOnly][SerializeField] private int m_NumBGGenerated;
+    internal int BGGenerated { get => m_NumBGGenerated; }
+
     [ReadOnly][SerializeField] private float m_ResponseTime;
     internal float ResponseTime { get => m_ResponseTime; }
 
