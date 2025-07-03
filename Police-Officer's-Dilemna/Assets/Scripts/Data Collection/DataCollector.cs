@@ -250,11 +250,11 @@ public class DataCollector : MonoBehaviour
         }
     }
 
-    private void SetBGData (BGData data)
+    private void SetBGData(BGData data)
     {
         m_CurrentBGData = data;
         
-        if (!m_Responded && m_CurrentPersonData != null)
+        if (!m_Responded && m_CurrentPersonData != m_DefaultPersonData)
         {
             NewResponse(ResponseType.NoResponse);
         }
@@ -268,7 +268,7 @@ public class DataCollector : MonoBehaviour
         m_CurrentPersonData = data;
     }
 
-    public void SetDominantHand (int hand)
+    public void SetDominantHand(int hand)
     {
         m_CurrentUserData.UserDominantHand = (DominantHand)hand + 1;
     }

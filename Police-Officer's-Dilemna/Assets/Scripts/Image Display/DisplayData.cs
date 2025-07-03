@@ -14,12 +14,18 @@ public class DisplayData : ScriptableObject
     public float MaxPersonTime { get => m_MaxPersonTime; }
     public float MinPersonTime { get => m_MinPersonTime; }
 
+    [SerializeField] private int m_MinImages, m_MaxImages;
+    public int MinImages { get => m_MinImages; }
+    public int MaxImages { get => m_MaxImages; }
 
-    [SerializeField] private float m_DisplayDelay;
+    [SerializeField] private float m_DisplayDelay, m_TrialDelay;
     public float DisplayDelay { get => m_DisplayDelay; }
+    public float TrialDelay { get => m_TrialDelay; }
 
+    /**
     [SerializeField] private float m_PersonDisplayRate;
     public float PersonDisplayRate { get => m_PersonDisplayRate; }
+    */
 
     private void Awake()
     {
