@@ -216,6 +216,7 @@ public class DataCollector : MonoBehaviour
 
         DisplayController.OnBGGenerated += SetBGData;
         DisplayController.OnPersonGenerated += SetPersonData;
+        DisplayController.OnTrialOver += UpdateResponse;
 
         SetDominantHand(0);
         FindObjectOfType<TMP_Dropdown>().onValueChanged.AddListener(SetDominantHand);
@@ -224,6 +225,8 @@ public class DataCollector : MonoBehaviour
     private void OnDestroy()
     {
         DisplayController.OnPersonGenerated -= SetPersonData;
+        DisplayController.OnPersonGenerated -= SetPersonData;
+        DisplayController.OnTrialOver -= UpdateResponse;
     }
 
     private void Update()
@@ -253,11 +256,6 @@ public class DataCollector : MonoBehaviour
     private void SetBGData(BGData data)
     {
         m_CurrentBGData = data;
-        
-        if (!m_Responded && m_CurrentPersonData != m_DefaultPersonData)
-        {
-            NewResponse(ResponseType.NoResponse);
-        }
 
         m_CurrentPersonData = m_DefaultPersonData;
         m_Responded = false;
@@ -266,6 +264,16 @@ public class DataCollector : MonoBehaviour
     private void SetPersonData(PersonData data)
     {
         m_CurrentPersonData = data;
+    }
+
+    private void UpdateResponse()
+    {
+        if (!m_Responded && m_CurrentPersonData != m_DefaultPersonData)
+        {
+            m_Responded = true;
+
+            NewResponse(ResponseType.NoResponse);
+        }
     }
 
     public void SetDominantHand(int hand)

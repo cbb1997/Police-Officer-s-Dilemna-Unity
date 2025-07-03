@@ -12,6 +12,7 @@ public class DisplayController : MonoBehaviour
 
     public static Action<BGData> OnBGGenerated;
     public static Action<PersonData> OnPersonGenerated;
+    public static Action OnTrialOver;
 
     private ImageDatabase m_ImageDatabase;
 
@@ -31,6 +32,8 @@ public class DisplayController : MonoBehaviour
         }
 
         m_ImageDatabase = GetComponent<ImageDatabase>();
+
+        DataCollector.OnUserResponse += EndTrial;
 
         NewTrial();
     }
@@ -61,7 +64,9 @@ public class DisplayController : MonoBehaviour
     {
         if (m_CurrentImages > m_CurrentMaxImages)
         {
+            OnTrialOver?.Invoke();
             NewTrial();
+
             return;
         }
 
@@ -136,13 +141,16 @@ public class DisplayController : MonoBehaviour
         m_CurrentPerson = null;
     }
 
-    private void EndTrial()
+    private void EndTrial(UserResponse response = null)
     {
+        if (response != null && response.ResponseType != ResponseType.EarlyResponse) return;
+
         RemoveImages();
         StopAllCoroutines();
 
         m_ScreenFilter.SetActive(true);
 
+        OnTrialOver?.Invoke();
         NewTrial();
     }
 
