@@ -45,6 +45,9 @@ public class DisplayController : MonoBehaviour
 
         DataCollector.OnUserResponse += EndTrial;
 
+        m_ImageDatabase.MakePersonPool(m_DisplayData.NumTrials);
+        m_ImageDatabase.MakeBGPool(m_DisplayData.NumTrials);
+
         NewTrial();
     }
     
@@ -58,6 +61,14 @@ public class DisplayController : MonoBehaviour
     #region ImageGeneration
     private void NewTrial()
     {
+        m_TrialNumber++;
+
+        if (m_TrialNumber >= m_DisplayData.NumTrials)
+        {
+            QuitGame();
+            return;
+        }
+
         StartCoroutine(TrialHelper(m_DisplayData.TrialDelay));
     }
 
@@ -65,7 +76,6 @@ public class DisplayController : MonoBehaviour
     {
         m_ScreenFilter.SetActive(true);
 
-        m_TrialNumber++;
         m_CurrentImages = 0;
         m_CurrentMaxImages = UnityEngine.Random.Range(m_DisplayData.MinImages, m_DisplayData.MaxImages);
 
@@ -138,7 +148,7 @@ public class DisplayController : MonoBehaviour
     {
         Destroy(m_CurrentPerson);
 
-        int seed = new System.Random().Next(0, m_ImageDatabase.GetPersonLength());
+        int seed = m_ImageDatabase.GetPoolNumber(m_TrialNumber);
 
         yield return new WaitForSeconds(personTime);
 

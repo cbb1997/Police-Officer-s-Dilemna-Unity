@@ -20,24 +20,29 @@ public class PersonDict
     {
         m_PersonRace = personRace;
         m_ObjectType = objectType;
+        m_Data = new List<int>();
     }
 
     internal PersonDict(int personRace, int objectType)
     {
         m_PersonRace = (PersonRace) personRace;
         m_ObjectType = (ObjectType) objectType;
+        m_Data = new List<int>();
     }
 }
 
 
 public class ImageDatabase : MonoBehaviour
 {
+    #region Data Structures
     [SerializeField] private PersonData[] m_PersonRaw;
     [SerializeField] private List<PersonDict> m_PersonDatabase;
 
     [SerializeField] private BGData[] m_BGRaw;
 
     private List<int> m_PersonPool, m_BGPool;
+
+    #endregion
 
     private void Start()
     {
@@ -50,6 +55,8 @@ public class ImageDatabase : MonoBehaviour
     [InvokeButton]
     private void SortPersonData()
     {
+        m_PersonDatabase.Clear();
+
         for (int i = 1; i < Enum.GetValues(typeof(PersonRace)).Length; i++)
         {
             for (int j = 1; j < Enum.GetValues(typeof(ObjectType)).Length; j++)
@@ -60,10 +67,34 @@ public class ImageDatabase : MonoBehaviour
 
         for (int i = 0; i < m_PersonRaw.Length; i++)
         {
-
+            for (int j = 0; j < m_PersonDatabase.Count; j++)
+            {
+                if (m_PersonRaw[i].PersonRace == m_PersonDatabase[j].PersonRace && m_PersonRaw[i].PersonObject == m_PersonDatabase[j].ObjectType)
+                {
+                    m_PersonDatabase[j].Data.Add(i);
+                    break;
+                }
+            }
         }
     }
 
+    public void MakePersonPool(int trialSize)
+    {
+        for (int i = 0; i < m_PersonDatabase.Count; i++)
+        {
+            for (int j = 0; j < trialSize / m_PersonDatabase.Count; j++)
+            {
+                m_PersonPool.Add(m_PersonDatabase[i].Data[UnityEngine.Random.Range(0, m_PersonDatabase[i].Data.Count - 1)]);
+            }
+        }
+    }
+
+    public void MakeBGPool(int trialSize)
+    {
+
+    }
+
+    #region Getters
     public int GetPersonLength()
     {
         return m_PersonRaw.Length;
@@ -72,6 +103,11 @@ public class ImageDatabase : MonoBehaviour
     public int GetBGLength()
     {
         return m_BGRaw.Length;
+    }
+
+    public int GetPoolNumber(int i)
+    {
+        return m_PersonPool[i];
     }
 
     public PersonData GetPersonData(int i)
@@ -93,4 +129,6 @@ public class ImageDatabase : MonoBehaviour
     {
         return m_BGRaw[i].Prefab;
     }
+
+    #endregion
 }

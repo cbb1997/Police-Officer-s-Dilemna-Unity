@@ -1832,8 +1832,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DisplayData: {fileID: 11400000, guid: 413b23bcd92e7084b94cde029e60975f, type: 2}
   m_ScreenFilter: {fileID: 943563185}
-  m_CurrentImages: 0
-  m_CurrentMaxImages: 0
+  m_ImageDatabase: {fileID: 0}
 --- !u!114 &1465035057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1854,10 +1853,10 @@ MonoBehaviour:
   m_PersonDatabase:
   - m_PersonRace: 1
     m_ObjectType: 1
-    m_Data: 
+    m_Data: 02000000
   - m_PersonRace: 1
     m_ObjectType: 2
-    m_Data: 
+    m_Data: 03000000
   - m_PersonRace: 2
     m_ObjectType: 1
     m_Data: 
