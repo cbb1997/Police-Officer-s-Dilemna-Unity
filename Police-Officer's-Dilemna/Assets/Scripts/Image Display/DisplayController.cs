@@ -6,23 +6,33 @@ using System;
 
 public class DisplayController : MonoBehaviour
 {
+    #region Serialized References
     [SerializeField] private DisplayData m_DisplayData;
-
     [SerializeField] private GameObject m_ScreenFilter;
+    [SerializeField] private ImageDatabase m_ImageDatabase;
 
+    #endregion
+
+    #region Actions
     public static Action<BGData> OnBGGenerated;
     public static Action<PersonData> OnPersonGenerated;
     public static Action OnTrialOver;
 
-    private ImageDatabase m_ImageDatabase;
+    #endregion
+
+    #region Members
+    private int m_TrialNumber;
 
     private float m_CurrentGenerationTime;
     private Vector2 m_CurrentImagePos;
 
-    [ReadOnly][SerializeField] private int m_CurrentImages, m_CurrentMaxImages;
+    private int m_CurrentImages, m_CurrentMaxImages;
 
     private GameObject m_CurrentPerson, m_CurrentBG;
 
+    #endregion
+
+    #region Callbacks
     private void Start()
     {
         if (m_DisplayData == null)
@@ -43,6 +53,9 @@ public class DisplayController : MonoBehaviour
         
     }
 
+    #endregion
+
+    #region ImageGeneration
     private void NewTrial()
     {
         StartCoroutine(TrialHelper(m_DisplayData.TrialDelay));
@@ -51,7 +64,8 @@ public class DisplayController : MonoBehaviour
     private IEnumerator TrialHelper(float delay)
     {
         m_ScreenFilter.SetActive(true);
-        
+
+        m_TrialNumber++;
         m_CurrentImages = 0;
         m_CurrentMaxImages = UnityEngine.Random.Range(m_DisplayData.MinImages, m_DisplayData.MaxImages);
 
@@ -154,11 +168,13 @@ public class DisplayController : MonoBehaviour
         NewTrial();
     }
 
+    #endregion
+
     private void QuitGame()
     {
 #if UNITY_EDITOR
-            EditorApplication.isPlaying = false; 
-            return;
+        EditorApplication.isPlaying = false; 
+        return;
 #endif
 
         Application.Quit();
