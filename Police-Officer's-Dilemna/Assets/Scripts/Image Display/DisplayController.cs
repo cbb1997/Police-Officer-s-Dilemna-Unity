@@ -61,11 +61,9 @@ public class DisplayController : MonoBehaviour
     #region ImageGeneration
     private void NewTrial()
     {
-        m_TrialNumber++;
-
         if (m_TrialNumber >= m_DisplayData.NumTrials)
         {
-            QuitGame();
+            //QuitGame();
             return;
         }
 
@@ -88,9 +86,7 @@ public class DisplayController : MonoBehaviour
     {
         if (m_CurrentImages > m_CurrentMaxImages)
         {
-            OnTrialOver?.Invoke();
-            NewTrial();
-
+            NextTrial();
             return;
         }
 
@@ -165,6 +161,13 @@ public class DisplayController : MonoBehaviour
         m_CurrentPerson = null;
     }
 
+    private void NextTrial()
+    {
+        OnTrialOver?.Invoke();
+        m_TrialNumber++;
+        NewTrial();
+    }
+
     private void EndTrial(UserResponse response = null)
     {
         if (response != null && response.ResponseType != ResponseType.EarlyResponse) return;
@@ -174,8 +177,7 @@ public class DisplayController : MonoBehaviour
 
         m_ScreenFilter.SetActive(true);
 
-        OnTrialOver?.Invoke();
-        NewTrial();
+        NextTrial();
     }
 
     #endregion

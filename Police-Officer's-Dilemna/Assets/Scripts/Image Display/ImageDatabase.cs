@@ -40,7 +40,7 @@ public class ImageDatabase : MonoBehaviour
 
     [SerializeField] private BGData[] m_BGRaw;
 
-    private List<int> m_PersonPool, m_BGPool;
+    [SerializeField] private List<int> m_PersonPool, m_BGPool;
 
     #endregion
 
@@ -80,11 +80,19 @@ public class ImageDatabase : MonoBehaviour
 
     public void MakePersonPool(int trialSize)
     {
+        if (trialSize % 4 != 0)
+        {
+            Debug.Log($"Integer parameter trialSize: {trialSize} is not divisible by four.");
+        }
+
         for (int i = 0; i < m_PersonDatabase.Count; i++)
         {
             for (int j = 0; j < trialSize / m_PersonDatabase.Count; j++)
             {
-                m_PersonPool.Add(m_PersonDatabase[i].Data[UnityEngine.Random.Range(0, m_PersonDatabase[i].Data.Count - 1)]);
+                int randValue = m_PersonDatabase[i].Data[UnityEngine.Random.Range(0, m_PersonDatabase[i].Data.Count - 1)];
+                int randIndex = UnityEngine.Random.Range(0, m_PersonPool.Count);
+
+                m_PersonPool.Insert(randIndex, randValue);
             }
         }
     }
