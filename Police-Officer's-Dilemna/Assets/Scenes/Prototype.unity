@@ -1853,16 +1853,16 @@ MonoBehaviour:
   m_PersonDatabase:
   - m_PersonRace: 1
     m_ObjectType: 1
-    m_Data: 02000000
+    m_Data: 00000000
   - m_PersonRace: 1
     m_ObjectType: 2
-    m_Data: 03000000
+    m_Data: 01000000
   - m_PersonRace: 2
     m_ObjectType: 1
-    m_Data: 
+    m_Data: 02000000
   - m_PersonRace: 2
     m_ObjectType: 2
-    m_Data: 
+    m_Data: 03000000
   m_BGRaw:
   - {fileID: 11400000, guid: 30eb09b8307c70544974fd4239f14a8f, type: 2}
   - {fileID: 11400000, guid: 08239c5f3ce83014fb465a41ee3d01c9, type: 2}
