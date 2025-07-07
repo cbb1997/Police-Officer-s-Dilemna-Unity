@@ -1832,6 +1832,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DisplayData: {fileID: 11400000, guid: 413b23bcd92e7084b94cde029e60975f, type: 2}
   m_ScreenFilter: {fileID: 943563185}
+  m_CurrentImages: 0
+  m_CurrentMaxImages: 0
 --- !u!114 &1465035057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1844,12 +1846,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f19bd93245f9bf429fb0aa72400857b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PersonDatabase:
-  - {fileID: 11400000, guid: 5d45d252a50dfa84884d6d5e6fa7a7eb, type: 2}
+  m_PersonRaw:
   - {fileID: 11400000, guid: 8dda6ba6a0ba4114caf5bfb02247b852, type: 2}
-  - {fileID: 11400000, guid: 127af39c70ffb834e840e1fe122e2149, type: 2}
+  - {fileID: 11400000, guid: 5d45d252a50dfa84884d6d5e6fa7a7eb, type: 2}
   - {fileID: 11400000, guid: e8ef234dbfc736e48891a11769ad08e9, type: 2}
-  m_BGDatabase:
+  - {fileID: 11400000, guid: 127af39c70ffb834e840e1fe122e2149, type: 2}
+  m_PersonDatabase:
+  - m_PersonRace: 1
+    m_ObjectType: 1
+    m_Data: 
+  - m_PersonRace: 1
+    m_ObjectType: 2
+    m_Data: 
+  - m_PersonRace: 2
+    m_ObjectType: 1
+    m_Data: 
+  - m_PersonRace: 2
+    m_ObjectType: 2
+    m_Data: 
+  m_BGRaw:
   - {fileID: 11400000, guid: 30eb09b8307c70544974fd4239f14a8f, type: 2}
   - {fileID: 11400000, guid: 08239c5f3ce83014fb465a41ee3d01c9, type: 2}
   - {fileID: 11400000, guid: 0603ae11f554cc94494cae09895953bf, type: 2}
