@@ -41,7 +41,7 @@ public class ImageDatabase : MonoBehaviour
 
     private void Start()
     {
-        SortPersonData();
+        if (m_PersonDatabase == null || m_PersonDatabase.Count == 0) SortPersonData();
 
         m_PersonPool = new List<int>();
         m_BGPool = new List<int>();
@@ -50,18 +50,18 @@ public class ImageDatabase : MonoBehaviour
     [InvokeButton]
     private void SortPersonData()
     {
-        if (m_PersonDatabase == null || m_PersonDatabase.Count == 0)
+        for (int i = 1; i < Enum.GetValues(typeof(PersonRace)).Length; i++)
         {
-            for (int i = 1; i < Enum.GetValues(typeof(PersonRace)).Length; i++)
+            for (int j = 1; j < Enum.GetValues(typeof(ObjectType)).Length; j++)
             {
-                for (int j = 1; j < Enum.GetValues(typeof(ObjectType)).Length; j++)
-                {
-                    m_PersonDatabase.Add(new PersonDict(i, j));
-                }
+                m_PersonDatabase.Add(new PersonDict(i, j));
             }
         }
 
-    
+        for (int i = 0; i < m_PersonRaw.Length; i++)
+        {
+
+        }
     }
 
     public int GetPersonLength()
