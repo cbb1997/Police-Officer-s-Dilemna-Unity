@@ -105,17 +105,23 @@ public class ImageDatabase : MonoBehaviour
         {
             for (int j = 0; j < m_BGRaw.Length; j++)
             {
-                if (m_BGPool[m_BGPool.Count - 1] == j) continue;
+                int randIndex = UnityEngine.Random.Range(0, m_BGPool.Count);
+                
+                if (i > 0)
+                {
+                    bool duplicate = (m_BGPool[randIndex] == j) || (randIndex > 0 && m_BGPool[randIndex - 1] == j);
 
-                int randIndex = UnityEngine.Random.Range(0, m_BGRaw.Length);
+                    //Debug.Log(duplicate);
 
-                m_BGPool.Insert(j, randIndex);
+                    if (duplicate) continue;
+                }
+
+                m_BGPool.Insert(randIndex, j);
 
                 if (i >= trialSize) break;
                 i++;
             }
         }
-
     }
 
     #region Getters
