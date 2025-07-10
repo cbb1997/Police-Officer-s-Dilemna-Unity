@@ -41,12 +41,12 @@ public class DisplayController : MonoBehaviour
             QuitGame();
         }
 
-        m_ImageDatabase = GetComponent<ImageDatabase>();
+        if (m_ImageDatabase == null) m_ImageDatabase = GetComponent<ImageDatabase>();
 
         DataCollector.OnUserResponse += EndTrial;
 
         m_ImageDatabase.MakePersonPool(m_DisplayData.NumTrials);
-        m_ImageDatabase.MakeBGPool(m_DisplayData.NumTrials);
+        m_ImageDatabase.MakeBGPool(m_DisplayData.NumTrials * m_DisplayData.MaxImages);
 
         NewTrial();
     }
@@ -126,12 +126,12 @@ public class DisplayController : MonoBehaviour
 
     private IEnumerator GenerateBG(float bgTime)
     {
-        int seed = new System.Random().Next(0, m_ImageDatabase.GetBGLength());
+        int currentBGIndex = m_ImageDatabase.GetBGPoolNumber(m_TrialNumber);
 
-        OnBGGenerated?.Invoke(m_ImageDatabase.GetBGData(seed));
+        OnBGGenerated?.Invoke(m_ImageDatabase.GetBGData(currentBGIndex));
 
-        m_CurrentBG = Instantiate(m_ImageDatabase.GetBGPrefab(seed));
-        m_CurrentImagePos = m_ImageDatabase.GetBGData(seed).GetDisplayPosition();
+        m_CurrentBG = Instantiate(m_ImageDatabase.GetBGPrefab(currentBGIndex));
+        m_CurrentImagePos = m_ImageDatabase.GetBGData(currentBGIndex).GetDisplayPosition();
 
         yield return new WaitForSeconds(bgTime);
 
@@ -144,12 +144,12 @@ public class DisplayController : MonoBehaviour
     {
         Destroy(m_CurrentPerson);
 
-        int seed = m_ImageDatabase.GetPoolNumber(m_TrialNumber);
+        int currentPersonIndex = m_ImageDatabase.GetPersonPoolNumber(m_TrialNumber);
 
         yield return new WaitForSeconds(personTime);
 
-        OnPersonGenerated?.Invoke(m_ImageDatabase.GetPersonData(seed));
-        m_CurrentPerson = Instantiate(m_ImageDatabase.GetPersonPrefab(seed), m_CurrentImagePos, Quaternion.identity);
+        OnPersonGenerated?.Invoke(m_ImageDatabase.GetPersonData(currentPersonIndex));
+        m_CurrentPerson = Instantiate(m_ImageDatabase.GetPersonPrefab(currentPersonIndex), m_CurrentImagePos, Quaternion.identity);
     }
 
     private void RemoveImages()

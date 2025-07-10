@@ -99,6 +99,22 @@ public class ImageDatabase : MonoBehaviour
 
     public void MakeBGPool(int trialSize)
     {
+        int i = 0;
+
+        while (i < trialSize)
+        {
+            for (int j = 0; j < m_BGRaw.Length; j++)
+            {
+                if (m_BGPool[m_BGPool.Count - 1] == j) continue;
+
+                int randIndex = UnityEngine.Random.Range(0, m_BGRaw.Length);
+
+                m_BGPool.Insert(j, randIndex);
+
+                if (i >= trialSize) break;
+                i++;
+            }
+        }
 
     }
 
@@ -113,9 +129,14 @@ public class ImageDatabase : MonoBehaviour
         return m_BGRaw.Length;
     }
 
-    public int GetPoolNumber(int i)
+    public int GetPersonPoolNumber(int i)
     {
         return m_PersonPool[i];
+    }
+
+    public int GetBGPoolNumber(int i)
+    {
+        return m_BGPool[i];
     }
 
     public PersonData GetPersonData(int i)
