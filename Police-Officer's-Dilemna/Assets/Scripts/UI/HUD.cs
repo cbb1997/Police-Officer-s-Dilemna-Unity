@@ -25,7 +25,15 @@ public class HUD : MonoBehaviour
         DataCollector.OnScoreChanged += UpdateScoreText;
         DataCollector.OnUserResponse += UpdateVisuals;
 
-        
+        MainMenu.OnGameStart += SetControlsText;
+    }
+
+    private void OnDestroy()
+    {
+        DataCollector.OnScoreChanged -= UpdateScoreText;
+        DataCollector.OnUserResponse -= UpdateVisuals;
+
+        MainMenu.OnGameStart -= SetControlsText;
     }
 
     public void SetControlsText(int hand)
@@ -41,8 +49,6 @@ public class HUD : MonoBehaviour
                 m_RightText.text = "Clear ->";
                 break;
             default:
-                m_LeftText.text = "<- Clear";
-                m_RightText.text = "Shoot ->";
                 break;
         }
     }

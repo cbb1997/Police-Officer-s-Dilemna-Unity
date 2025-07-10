@@ -364,7 +364,7 @@ GameObject:
   - component: {fileID: 513735210}
   - component: {fileID: 513735209}
   m_Layer: 5
-  m_Name: ClearText
+  m_Name: LeftText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -938,7 +938,7 @@ GameObject:
   - component: {fileID: 691724826}
   - component: {fileID: 691724825}
   m_Layer: 5
-  m_Name: ShootText
+  m_Name: RightText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

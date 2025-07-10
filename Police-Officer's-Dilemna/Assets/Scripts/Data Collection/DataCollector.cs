@@ -253,8 +253,8 @@ public class DataCollector : MonoBehaviour
         DisplayController.OnPersonGenerated += SetPersonData;
         DisplayController.OnTrialOver += UpdateResponse;
 
-        SetDominantHand(0);
-        FindObjectOfType<TMP_Dropdown>().onValueChanged.AddListener(SetDominantHand);
+        SetDominantHand(1);
+        MainMenu.OnGameStart += SetDominantHand;
     }
 
     private void OnDestroy()
@@ -263,7 +263,7 @@ public class DataCollector : MonoBehaviour
         DisplayController.OnPersonGenerated -= SetPersonData;
         DisplayController.OnTrialOver -= UpdateResponse;
 
-        FindObjectOfType<TMP_Dropdown>().onValueChanged.RemoveListener(SetDominantHand);
+        MainMenu.OnGameStart -= SetDominantHand;
     }
 
     private void Update()
@@ -323,7 +323,7 @@ public class DataCollector : MonoBehaviour
 
     public void SetDominantHand(int hand)
     {
-        m_CurrentUserData.UserDominantHand = (DominantHand)hand + 1;
+        m_CurrentUserData.UserDominantHand = (DominantHand) hand;
     }
 
     public void NewResponse(int responseType)
