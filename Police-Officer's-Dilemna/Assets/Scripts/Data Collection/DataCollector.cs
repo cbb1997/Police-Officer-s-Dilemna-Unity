@@ -253,7 +253,6 @@ public class DataCollector : MonoBehaviour
         DisplayController.OnPersonGenerated += SetPersonData;
         DisplayController.OnTrialOver += UpdateResponse;
 
-        SetDominantHand(1);
         MainMenu.OnGameStart += SetDominantHand;
     }
 

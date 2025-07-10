@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private GameObject m_TrialObjects;
 
-    private int m_DominantHand;
+    private int m_DominantHand = 1;
 
     public static Action<int> OnGameStart;
 
