@@ -212,7 +212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &201200945
 Transform:
   m_ObjectHideFlags: 0
@@ -251,7 +251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &364217930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1657,9 +1657,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ScoreUI: {fileID: 1190993187}
   m_FeedbackUI: {fileID: 1675556682}
+  m_LeftText: {fileID: 0}
+  m_RightText: {fileID: 0}
   m_ShootButton: {fileID: 1603059547}
   m_ClearButton: {fileID: 1491324172}
-  m_TextFadeTime: 0.5
+  m_TextFadeTime: 1
 --- !u!1 &1033263459
 GameObject:
   m_ObjectHideFlags: 0
@@ -2814,7 +2816,7 @@ MonoBehaviour:
   m_fontSize: 14
   m_fontSizeBase: 14
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0

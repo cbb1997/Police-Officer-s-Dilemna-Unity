@@ -7,6 +7,7 @@ using TMPro;
 public class HUD : MonoBehaviour
 {
     [SerializeField] private TMP_Text m_ScoreUI, m_FeedbackUI;
+    [SerializeField] private TMP_Text m_LeftText, m_RightText;
 
     [SerializeField] private Button m_ShootButton, m_ClearButton;
 
@@ -25,6 +26,13 @@ public class HUD : MonoBehaviour
         DataCollector.OnUserResponse += UpdateVisuals;
 
         //DisplayController.OnPersonGenerated += (imageData) => SetButtonEnabled(true);
+
+        FindObjectOfType<TMP_Dropdown>().onValueChanged.AddListener(SetControlsText);
+    }
+
+    public void SetControlsText(int hand)
+    {
+        Debug.Log("Set");
     }
 
     private void UpdateScoreText(int score)

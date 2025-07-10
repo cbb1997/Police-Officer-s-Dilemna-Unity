@@ -262,6 +262,8 @@ public class DataCollector : MonoBehaviour
         DisplayController.OnPersonGenerated -= SetPersonData;
         DisplayController.OnPersonGenerated -= SetPersonData;
         DisplayController.OnTrialOver -= UpdateResponse;
+
+        FindObjectOfType<TMP_Dropdown>().onValueChanged.RemoveListener(SetDominantHand);
     }
 
     private void Update()
