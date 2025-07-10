@@ -38,7 +38,7 @@ public class HUD : MonoBehaviour
 
     public void SetControlsText(int hand)
     {
-        switch (hand + 1)
+        switch (hand)
         {
             case 1:
                 m_LeftText.text = "<- Clear";
