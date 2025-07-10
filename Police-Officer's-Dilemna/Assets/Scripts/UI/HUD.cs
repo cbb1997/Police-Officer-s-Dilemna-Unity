@@ -25,14 +25,26 @@ public class HUD : MonoBehaviour
         DataCollector.OnScoreChanged += UpdateScoreText;
         DataCollector.OnUserResponse += UpdateVisuals;
 
-        //DisplayController.OnPersonGenerated += (imageData) => SetButtonEnabled(true);
-
-        FindObjectOfType<TMP_Dropdown>().onValueChanged.AddListener(SetControlsText);
+        
     }
 
     public void SetControlsText(int hand)
     {
-        Debug.Log("Set");
+        switch (hand + 1)
+        {
+            case 1:
+                m_LeftText.text = "<- Clear";
+                m_RightText.text = "Shoot ->";
+                break;
+            case 2:
+                m_LeftText.text = "<- Shoot";
+                m_RightText.text = "Clear ->";
+                break;
+            default:
+                m_LeftText.text = "<- Clear";
+                m_RightText.text = "Shoot ->";
+                break;
+        }
     }
 
     private void UpdateScoreText(int score)
