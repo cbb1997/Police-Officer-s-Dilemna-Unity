@@ -16,7 +16,7 @@ public class HUD : MonoBehaviour
 
     private void Start()
     {
-        SetButtonEnabled(false);
+        //SetButtonEnabled(false);
 
         m_BaseScoreText = m_ScoreUI.text;
         UpdateScoreText(0);
@@ -24,14 +24,14 @@ public class HUD : MonoBehaviour
         DataCollector.OnScoreChanged += UpdateScoreText;
         DataCollector.OnUserResponse += UpdateVisuals;
 
-        DisplayController.OnPersonGenerated += (imageData) => SetButtonEnabled(true);
+        //DisplayController.OnPersonGenerated += (imageData) => SetButtonEnabled(true);
     }
 
     private void UpdateScoreText(int score)
     {
         m_ScoreUI.text = $"{m_BaseScoreText} {score}";
 
-        SetButtonEnabled(false);
+        //SetButtonEnabled(false);
     }
 
     private void UpdateVisuals(UserResponse response)
