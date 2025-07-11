@@ -7,7 +7,7 @@ using UnityEngine;
 public class ImageData : ScriptableObject
 {
     [SerializeField] protected string m_ImageName;
-    public string Name { get => m_ImageName; }
+    public string ImageName { get => m_ImageName; }
 
     [SerializeField] protected Sprite m_ImageRef;
     public Sprite Image { get => m_ImageRef; }

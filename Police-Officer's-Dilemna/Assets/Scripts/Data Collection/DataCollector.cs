@@ -223,6 +223,7 @@ public class UserData
 
 public class DataCollector : MonoBehaviour
 {
+    #region Serialized Fields
     [SerializeField] private UserData m_CurrentUserData;
 
     [SerializeField] private PersonData m_DefaultPersonData;
@@ -231,19 +232,30 @@ public class DataCollector : MonoBehaviour
     [ReadOnly][SerializeField] private PersonData m_CurrentPersonData;
     [ReadOnly][SerializeField] private BGData m_CurrentBGData;
 
-    public static Action<UserResponse> OnUserResponse;
+    #endregion
 
+    #region Actions
+    public static Action<UserResponse> OnUserResponse;
     public static Action<int> OnScoreChanged;
+
+    #endregion
+
+    #region Private Member Fields
+    private List<string> m_CurrentBGNames;
 
     private float m_CurrentResponseTime;
 
     private bool m_Responded = true;
+
+    #endregion
 
     private void Start()
     {
         m_CurrentUserData = new UserData();
 
         m_CurrentUserData.ResetData();
+
+        m_CurrentBGNames = new List<string>();
 
         DisplayController.OnBGGenerated += SetBGData;
         DisplayController.OnPersonGenerated += SetPersonData;
@@ -287,6 +299,11 @@ public class DataCollector : MonoBehaviour
         }
     }
 
+    private void ClearResponseData()
+    {
+        m_CurrentBGNames.Clear();
+    }
+
     private void ResetReponse()
     {
         m_CurrentPersonData = m_DefaultPersonData;
@@ -294,10 +311,16 @@ public class DataCollector : MonoBehaviour
         m_Responded = false;
     }
 
+    private void RecordBGData()
+    {
+        m_CurrentBGNames.Add(m_CurrentBGData.ImageName);
+    }
+
     private void SetBGData(BGData data)
     {
         m_CurrentBGData = data;
 
+        RecordBGData();
         ResetReponse();
     }
 
@@ -324,6 +347,8 @@ public class DataCollector : MonoBehaviour
     public void NewResponse(int responseType)
     {
         OnUserResponse?.Invoke(m_CurrentUserData.AddResponse(new UserResponse((ResponseType)responseType, m_CurrentPersonData.PersonRace, m_CurrentPersonData.PersonObject)));
+
+
 
         OnScoreChanged?.Invoke(m_CurrentUserData.Score);
     }
