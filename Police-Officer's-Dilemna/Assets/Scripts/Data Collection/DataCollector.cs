@@ -53,8 +53,10 @@ public class UserResponse
     [ReadOnly][SerializeField] private ResponseType m_ResponseType;
     internal ResponseType ResponseType { get => m_ResponseType; }
 
-    [ReadOnly][SerializeField] private string m_BGName, m_PersonName;
-    internal string BGName { get => m_BGName; }
+    [ReadOnly][SerializeField] private List<string> m_BGNames;
+    internal List<string> BGNames {  get => m_BGNames; }
+
+    [ReadOnly][SerializeField] private string m_PersonName;
     internal string PersonName { get => m_PersonName; }
 
     [ReadOnly][SerializeField] private Vector2 m_PersonDisplayPosition;
@@ -95,8 +97,8 @@ public class UserResponse
     }
 
     internal UserResponse(ResponseType responseType, PersonRace personRace, ObjectType objectType, 
-        string bgName, string personName,
-        Vector2 displayPos, int bgGenerated,
+        List<string> bgNames, string personName,
+        Vector2 displayPos, int currentScore, int bgGenerated,
         float responseTime, float bgTime, float personTime,
         bool correct)
     {
@@ -104,24 +106,18 @@ public class UserResponse
         m_PersonRace = personRace;
         m_ObjectType = objectType;
 
-        m_BGName = bgName;
+        m_BGNames = new List<string>(bgNames);
         m_PersonName = personName;
 
         m_PersonDisplayPosition = new Vector2(displayPos.x, displayPos.y);
+        m_CurrentScore = currentScore;
         m_NumBGGenerated = bgGenerated;
 
         m_ResponseTime = responseTime;
         m_BGTime = bgTime;
         m_PersonTime = personTime;
 
-        if ((int)(m_ObjectType) == (int)(m_ResponseType))
-        {
-            m_Correct = true;
-        }
-        else
-        {
-            m_Correct = false;
-        }
+        m_Correct = (int)(m_ObjectType) == (int)(m_ResponseType);
     }
 }
 

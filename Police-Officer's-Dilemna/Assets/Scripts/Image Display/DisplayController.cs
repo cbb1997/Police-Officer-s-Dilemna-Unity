@@ -21,7 +21,7 @@ public class DisplayController : MonoBehaviour
     #endregion
 
     #region Members
-    private int m_TrialNumber;
+    private int m_TrialNumber, m_ImageNumber;
 
     private float m_CurrentGenerationTime;
     private Vector2 m_CurrentImagePos;
@@ -93,6 +93,7 @@ public class DisplayController : MonoBehaviour
         StartCoroutine(GenerateHelper(m_DisplayData.DisplayDelay, m_CurrentImages == m_CurrentMaxImages));
 
         m_CurrentImages++;
+        m_ImageNumber++;
     }
 
     private IEnumerator GenerateHelper(float delay, bool generatePerson)
@@ -126,7 +127,7 @@ public class DisplayController : MonoBehaviour
 
     private IEnumerator GenerateBG(float bgTime)
     {
-        int currentBGIndex = m_ImageDatabase.GetBGPoolNumber(m_TrialNumber);
+        int currentBGIndex = m_ImageDatabase.GetBGPoolNumber(m_ImageNumber);
 
         OnBGGenerated?.Invoke(m_ImageDatabase.GetBGData(currentBGIndex));
 
