@@ -326,6 +326,8 @@ public class DataCollector : MonoBehaviour
     private void SetPersonData(PersonData data)
     {
         m_CurrentPersonData = data;
+
+        m_CurrentResponseTime = 0;
     }
 
     private void UpdateResponse()
@@ -347,7 +349,10 @@ public class DataCollector : MonoBehaviour
 
     public void NewResponse(int responseType)
     {
-        UserResponse currentResponse = new UserResponse((ResponseType)responseType, m_CurrentPersonData.PersonRace, m_CurrentPersonData.PersonObject);
+        UserResponse currentResponse = new UserResponse((ResponseType)responseType, m_CurrentPersonData.PersonRace, m_CurrentPersonData.PersonObject,
+            m_CurrentBGNames, m_CurrentPersonData.ImageName,
+            m_CurrentPersonData.CurrentPosition, m_CurrentUserData.Score, m_CurrentBGNames.Count,
+            m_CurrentResponseTime, 0.0f, 0.0f);
 
         m_CurrentUserData.AddResponse(currentResponse);
         OnUserResponse?.Invoke(currentResponse);
@@ -360,7 +365,7 @@ public class DataCollector : MonoBehaviour
         UserResponse currentResponse = new UserResponse(responseType, m_CurrentPersonData.PersonRace, m_CurrentPersonData.PersonObject, 
             m_CurrentBGNames, m_CurrentPersonData.ImageName,
             m_CurrentPersonData.CurrentPosition, m_CurrentUserData.Score, m_CurrentBGNames.Count,
-            0.0f, 0.0f, 0.0f);
+            m_CurrentResponseTime, 0.0f, 0.0f);
 
         m_CurrentUserData.AddResponse(currentResponse);
         OnUserResponse?.Invoke(currentResponse);
