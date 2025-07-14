@@ -117,6 +117,7 @@ public class DisplayController : MonoBehaviour
         if (generatePerson)
         {
             m_CurrentGenerationTime = UnityEngine.Random.Range(m_DisplayData.MinPersonTime, maxTime);
+            
             StartCoroutine(GeneratePerson(m_CurrentGenerationTime));
 
             //Debug.Log($"Person Display Time: {m_CurrentGenerationTime}");
@@ -149,6 +150,7 @@ public class DisplayController : MonoBehaviour
 
         yield return new WaitForSeconds(personTime);
 
+        m_ImageDatabase.GetPersonData(currentPersonIndex).CurrentPosition = m_CurrentImagePos;
         OnPersonGenerated?.Invoke(m_ImageDatabase.GetPersonData(currentPersonIndex));
         m_CurrentPerson = Instantiate(m_ImageDatabase.GetPersonPrefab(currentPersonIndex), m_CurrentImagePos, Quaternion.identity);
     }

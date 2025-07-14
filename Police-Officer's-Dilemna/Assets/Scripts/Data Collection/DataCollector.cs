@@ -99,8 +99,7 @@ public class UserResponse
     internal UserResponse(ResponseType responseType, PersonRace personRace, ObjectType objectType, 
         List<string> bgNames, string personName,
         Vector2 displayPos, int currentScore, int bgGenerated,
-        float responseTime, float bgTime, float personTime,
-        bool correct)
+        float responseTime, float bgTime, float personTime)
     {
         m_ResponseType = responseType;
         m_PersonRace = personRace;
@@ -337,6 +336,8 @@ public class DataCollector : MonoBehaviour
 
             NewResponse(ResponseType.NoResponse);
         }
+
+        ClearResponseData();
     }
 
     public void SetDominantHand(int hand)
@@ -346,16 +347,23 @@ public class DataCollector : MonoBehaviour
 
     public void NewResponse(int responseType)
     {
-        OnUserResponse?.Invoke(m_CurrentUserData.AddResponse(new UserResponse((ResponseType)responseType, m_CurrentPersonData.PersonRace, m_CurrentPersonData.PersonObject)));
+        UserResponse currentResponse = new UserResponse((ResponseType)responseType, m_CurrentPersonData.PersonRace, m_CurrentPersonData.PersonObject);
 
-
+        m_CurrentUserData.AddResponse(currentResponse);
+        OnUserResponse?.Invoke(currentResponse);
 
         OnScoreChanged?.Invoke(m_CurrentUserData.Score);
     }
 
     public void NewResponse(ResponseType responseType)
     {
-        OnUserResponse?.Invoke(m_CurrentUserData.AddResponse(new UserResponse(responseType, m_CurrentPersonData.PersonRace, m_CurrentPersonData.PersonObject)));
+        UserResponse currentResponse = new UserResponse(responseType, m_CurrentPersonData.PersonRace, m_CurrentPersonData.PersonObject, 
+            m_CurrentBGNames, m_CurrentPersonData.ImageName,
+            m_CurrentPersonData.CurrentPosition, m_CurrentUserData.Score, m_CurrentBGNames.Count,
+            0.0f, 0.0f, 0.0f);
+
+        m_CurrentUserData.AddResponse(currentResponse);
+        OnUserResponse?.Invoke(currentResponse);
 
         OnScoreChanged?.Invoke(m_CurrentUserData.Score);
     }

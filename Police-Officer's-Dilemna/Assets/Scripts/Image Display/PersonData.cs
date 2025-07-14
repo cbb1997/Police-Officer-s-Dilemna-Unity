@@ -11,6 +11,9 @@ public class PersonData : ImageData
     [SerializeField] private ObjectType m_PersonObject;
     public ObjectType PersonObject { get => m_PersonObject; }
 
+    [SerializeField] private Vector2 m_CurrentImagePosition;
+    public Vector2 CurrentPosition { get => m_CurrentImagePosition; set => m_CurrentImagePosition = value; }
+
     protected override void Awake()
     {
 
