@@ -189,9 +189,8 @@ public class DisplayController : MonoBehaviour
     {
 #if UNITY_EDITOR
         EditorApplication.isPlaying = false; 
-        return;
-#endif
-
+#else
         Application.Quit();
+#endif
     }
 }

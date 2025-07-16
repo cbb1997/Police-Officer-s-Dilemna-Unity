@@ -40,36 +40,32 @@ public class UserSFX : MonoBehaviour
         }
 
 
-        switch (response.Correct)
+        if (response.Correct)
         {
-            case true:
-                AudioController.PlaySFX(m_CorrectSFX, m_SFXVolume);
-                break;
-            
-            case false:
-                switch(response.ResponseType)
-                {
-                    case ResponseType.Shoot:
-                    case ResponseType.Clear:
-                        AudioController.PlaySFX(m_IncorrectSFX, m_SFXVolume);
-                        break;
-
-                    case ResponseType.NoResponse:
-                    case ResponseType.EarlyResponse:
-                        AudioController.PlaySFX(m_MissSFX, m_SFXVolume);
-                        break;
-
-                    case ResponseType.Other:
-                        break;
-
-                    default:
-                        break;
-                } 
-                
-                break;
-            
-            default:
-                break;
+            AudioController.PlaySFX(m_CorrectSFX, m_SFXVolume);
         }
+        else
+        {
+            switch (response.ResponseType)
+            {
+                case ResponseType.Shoot:
+                case ResponseType.Clear:
+                    AudioController.PlaySFX(m_IncorrectSFX, m_SFXVolume);
+                    break;
+
+                case ResponseType.NoResponse:
+                case ResponseType.EarlyResponse:
+                    AudioController.PlaySFX(m_MissSFX, m_SFXVolume);
+                    break;
+
+                case ResponseType.Other:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        //
     }
 }
