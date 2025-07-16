@@ -355,9 +355,9 @@ public class DataCollector : MonoBehaviour
             m_CurrentResponseTime, 0.0f, 0.0f);
 
         m_CurrentUserData.AddResponse(currentResponse);
-        OnUserResponse?.Invoke(currentResponse);
 
         OnScoreChanged?.Invoke(m_CurrentUserData.Score);
+        OnUserResponse?.Invoke(currentResponse);
     }
 
     public void NewResponse(ResponseType responseType)
@@ -368,9 +368,9 @@ public class DataCollector : MonoBehaviour
             m_CurrentResponseTime, 0.0f, 0.0f);
 
         m_CurrentUserData.AddResponse(currentResponse);
-        OnUserResponse?.Invoke(currentResponse);
 
         OnScoreChanged?.Invoke(m_CurrentUserData.Score);
+        OnUserResponse?.Invoke(currentResponse);
     }
 }
 

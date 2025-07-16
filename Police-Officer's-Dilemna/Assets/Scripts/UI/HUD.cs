@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class HUD : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private float m_TextFadeTime;
 
     private string m_BaseScoreText;
+    private int m_Score, m_Difference;
 
     private void Start()
     {
@@ -55,7 +57,13 @@ public class HUD : MonoBehaviour
 
     private void UpdateScoreText(int score)
     {
-        m_ScoreUI.text = $"{m_BaseScoreText} {score}";
+        //Debug.Log($"{m_Score} {score}");
+
+        m_Difference = Math.Abs(m_Score - score);
+
+        m_Score = score;
+
+        m_ScoreUI.text = $"{m_BaseScoreText} {m_Score}";
 
         //SetButtonEnabled(false);
     }
@@ -84,6 +92,8 @@ public class HUD : MonoBehaviour
                 default:
                     break;
             }
+
+            m_FeedbackUI.text += $" +{m_Difference}";
         }
         else
         {
@@ -111,6 +121,8 @@ public class HUD : MonoBehaviour
                 default:
                     break;
             }
+
+            m_FeedbackUI.text += $" -{m_Difference}";
         }
 
         FadeOutText(m_FeedbackUI);
