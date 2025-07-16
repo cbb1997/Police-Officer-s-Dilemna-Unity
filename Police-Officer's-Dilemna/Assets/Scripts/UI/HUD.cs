@@ -41,12 +41,12 @@ public class HUD : MonoBehaviour
         switch (hand)
         {
             case 1:
-                m_LeftText.text = "<- Clear";
-                m_RightText.text = "Shoot ->";
+                m_LeftText.text = "[Left Arrow]: Clear";
+                m_RightText.text = "[Right Arrow]: Shoot";
                 break;
             case 2:
-                m_LeftText.text = "<- Shoot";
-                m_RightText.text = "Clear ->";
+                m_LeftText.text = "[Left Arrow]: Shoot";
+                m_RightText.text = "[Right Arrow]: Clear";
                 break;
             default:
                 break;
