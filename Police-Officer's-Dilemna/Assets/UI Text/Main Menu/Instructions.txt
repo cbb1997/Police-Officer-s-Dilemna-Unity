@@ -1,0 +1,39 @@
+This video game simulation contains 80 rounds in which armed and unarmed men will appear in a variety of background images. 
+
+You have to decide whether to shoot or clear the men that appear.
+
+We will explain the instructions in more detail in the following screen.
+
+First, what is your dominant hand? If you do not have a dominant hand, choose the hand that you normally use to hold your phone when you make phone calls.
+
+
+
+Armed men pose an imminent threat and should be shot as quickly as possible. 
+
+Hit: You will earn 10 points for shooting an armed man. 
+Miss: You will lose 40 points for clearing an armed man.
+
+
+
+Unarmed men pose no threat and should be flagged accordingly by clearing them as quickly as possible.
+
+Correct Rejection: You will earn 5 points for clearing an unarmed man. 
+False Alarm: You will lose 20 points for shooting an unarmed man.
+
+
+
+To shoot, press the [right/left] arrow on your keyboard.
+To clear, press the [left/right] arrow on your keyboard.
+
+It is important that you make a decision to shoot or clear the man each round. If you do not press any arrow key in time, you will lose 10 points. 
+
+You also want to be careful not to react too early. If you press an arrow key before the man appears, you will lose 10 points.
+
+
+
+Before the game officially starts, you will have the opportunity to practice this game for 16 rounds.
+
+Important notes: 
+	- The points you earn during these practice rounds will not affect your earnings.
+	- Once the game begins, in order to ensure the integrity of your results please to do not change your Wifi or 	browser settings or perform any actions that render your connection to the internet unstable.
+When you are ready to start the practice period, please click the button below. 
