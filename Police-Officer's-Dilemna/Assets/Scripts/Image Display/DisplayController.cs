@@ -17,6 +17,7 @@ public class DisplayController : MonoBehaviour
     public static Action<BGData> OnBGGenerated;
     public static Action<PersonData> OnPersonGenerated;
     public static Action OnTrialOver;
+    public static Action OnGameOver;
 
     #endregion
 
@@ -63,7 +64,7 @@ public class DisplayController : MonoBehaviour
     {
         if (m_TrialNumber >= m_DisplayData.NumTrials)
         {
-            //QuitGame();
+            OnGameOver?.Invoke();
             return;
         }
 

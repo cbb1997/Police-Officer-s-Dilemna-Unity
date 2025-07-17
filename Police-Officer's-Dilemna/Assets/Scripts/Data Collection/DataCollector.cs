@@ -259,6 +259,7 @@ public class DataCollector : MonoBehaviour
         DisplayController.OnBGGenerated += SetBGData;
         DisplayController.OnPersonGenerated += SetPersonData;
         DisplayController.OnTrialOver += UpdateResponse;
+        DisplayController.OnGameOver += ExportUserData;
 
         MainMenu.OnGameStart += SetDominantHand;
     }
@@ -268,6 +269,7 @@ public class DataCollector : MonoBehaviour
         DisplayController.OnPersonGenerated -= SetPersonData;
         DisplayController.OnPersonGenerated -= SetPersonData;
         DisplayController.OnTrialOver -= UpdateResponse;
+        DisplayController.OnGameOver -= ExportUserData;
 
         MainMenu.OnGameStart -= SetDominantHand;
     }
@@ -340,6 +342,11 @@ public class DataCollector : MonoBehaviour
         }
 
         ClearResponseData();
+    }
+
+    private void ExportUserData()
+    {
+
     }
 
     public void SetDominantHand(int hand)
