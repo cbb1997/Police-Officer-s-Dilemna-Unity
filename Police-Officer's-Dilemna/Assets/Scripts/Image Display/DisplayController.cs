@@ -62,11 +62,13 @@ public class DisplayController : MonoBehaviour
     #region ImageGeneration
     private void NewTrial()
     {
+        /**
         if (m_TrialNumber >= m_DisplayData.NumTrials)
         {
             OnGameOver?.Invoke();
             return;
         }
+        */
 
         StartCoroutine(TrialHelper(m_DisplayData.TrialDelay));
     }
@@ -80,7 +82,15 @@ public class DisplayController : MonoBehaviour
 
         yield return new WaitForSeconds(delay);
 
-        GenerateImage();
+        if (m_TrialNumber >= m_DisplayData.NumTrials)
+        {
+            OnGameOver?.Invoke();
+            StopAllCoroutines();
+        }
+        else
+        {
+            GenerateImage();
+        }
     }
 
     private void GenerateImage()

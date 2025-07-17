@@ -543,7 +543,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dadf77dbb5289d47bd8f37b9ee92d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EndMenu: {fileID: 0}
+  m_EndMenu: {fileID: 1638695477}
+  m_TrialObjects: {fileID: 201200944}
+  m_EndText: {fileID: 567200009}
 --- !u!1 &513735207
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,10 +849,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1638695481}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.1, y: 0.35}
+  m_AnchorMax: {x: 0.9, y: 0.9}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &567200009
 MonoBehaviour:
@@ -872,7 +874,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You have reached the end!
+  m_text: 'You have reached the end of the game.
+
+
+    You may safely exit the application
+    and continue the rest of the survey.
+
+
+    Thank you for participating!
+
+
+    Final
+    Score: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -899,8 +912,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
