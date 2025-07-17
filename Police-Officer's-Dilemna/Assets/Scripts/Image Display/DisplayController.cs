@@ -116,10 +116,18 @@ public class DisplayController : MonoBehaviour
 
         yield return new WaitForSeconds(delay);
 
-        m_CurrentGenerationTime = UnityEngine.Random.Range(m_DisplayData.MinImageTime, m_DisplayData.MaxImageTime);
+        if (generatePerson)
+        {
+            m_CurrentGenerationTime = m_DisplayData.FinalImageTime;
+        }
+        else
+        {
+            m_CurrentGenerationTime = UnityEngine.Random.Range(m_DisplayData.MinImageTime, m_DisplayData.MaxImageTime);
+        }
+
         StartCoroutine(GenerateBG(m_CurrentGenerationTime));
 
-        //Debug.Log($"BG Display Time: {m_CurrentGenerationTime}");
+        Debug.Log($"BG Display Time: {m_CurrentGenerationTime}");
 
         float maxTime = m_CurrentGenerationTime + (m_DisplayData.MaxPersonTime - m_DisplayData.MaxImageTime);
 

@@ -9,9 +9,10 @@ public class DisplayData : ScriptableObject
     [SerializeField] private int m_NumTrials;
     public int NumTrials { get => m_NumTrials; }
 
-    [SerializeField] private float m_MinImageTime, m_MaxImageTime;
+    [SerializeField] private float m_MinImageTime, m_MaxImageTime, m_FinalImageTime;
     public float MinImageTime { get => m_MinImageTime; }
     public float MaxImageTime { get => m_MaxImageTime; }
+    public float FinalImageTime { get => m_FinalImageTime; }
 
     [SerializeField] private float m_MinPersonTime, m_MaxPersonTime;
     public float MaxPersonTime { get => m_MaxPersonTime; }
