@@ -35,5 +35,6 @@ Before the game officially starts, you will have the opportunity to practice thi
 
 Important notes: 
 	- The points you earn during these practice rounds will not affect your earnings.
-	- Once the game begins, in order to ensure the integrity of your results please to do not change your Wifi or 	browser settings or perform any actions that render your connection to the internet unstable.
+	- Once the game begins, please to do not change your Wifi or browser settings or perform any actions that might render your connection to the internet unstable.
+
 When you are ready to start the practice period, please click the button below. 
