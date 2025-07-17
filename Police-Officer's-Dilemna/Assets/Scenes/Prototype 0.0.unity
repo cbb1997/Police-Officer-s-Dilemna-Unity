@@ -1674,7 +1674,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "This video game simulation contains 80 rounds in which armed and unarmed
+  m_text: "This video game simulation contains 16 rounds in which armed and unarmed
     men will appear in a variety of background images. \r\n\r\nWe will explain the
     instructions in more detail in the following screens.\r\n\r\nFirst, please indicate
     your dominant hand below. If you do not have a dominant hand, choose the hand
@@ -2060,8 +2060,8 @@ MonoBehaviour:
   m_text: "It is important that you make a decision to shoot or clear the man each
     round. If you do not press any arrow key in time, you will lose 10 points. \r\n\r\nYou
     also want to be careful not to react too early. If you press an arrow key before
-    the man appears, you will lose 10 points.\r\n\nWhen you are ready to start the
-    practice period, please click the button below. \r"
+    the man appears, you will lose 10 points.\r\n\nWhen you are ready to start, please
+    click the button below. \r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

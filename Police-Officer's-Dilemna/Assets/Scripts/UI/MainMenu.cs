@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         m_StartButton.onClick.AddListener(StartGame);
-        m_StartButton.onClick.AddListener(Next);
+        m_NextButton.onClick.AddListener(Next);
 
         m_HandDropdown.onValueChanged.AddListener(SetDominantHand);
     }
@@ -31,7 +31,7 @@ public class MainMenu : MonoBehaviour
     private void OnDestroy()
     {
         m_StartButton.onClick.RemoveListener(StartGame);
-        m_StartButton.onClick.RemoveListener(Next);
+        m_NextButton.onClick.RemoveListener(Next);
 
         m_HandDropdown.onValueChanged.RemoveListener(SetDominantHand);
     }
