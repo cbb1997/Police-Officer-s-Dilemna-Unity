@@ -491,9 +491,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_StartButton: {fileID: 1698853902}
-  m_NextButton: {fileID: 0}
+  m_NextButton: {fileID: 1752952653}
   m_HandDropdown: {fileID: 1549805600}
-  m_Instructions: []
+  m_Instructions:
+  - {fileID: 944205403}
+  - {fileID: 1282947480}
+  - {fileID: 332366158}
+  - {fileID: 1027010441}
   m_TrialObjects: {fileID: 201200944}
 --- !u!1 &513735207
 GameObject:
