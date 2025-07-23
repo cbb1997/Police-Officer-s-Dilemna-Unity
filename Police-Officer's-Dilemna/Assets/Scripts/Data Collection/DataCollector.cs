@@ -130,6 +130,9 @@ public class UserData
     [ReadOnly][SerializeField] private int m_Score;
     internal int Score { get => m_Score; }
 
+    [ReadOnly][SerializeField] private bool m_CompletedPractice;
+    internal bool CompletedPractice { get => m_CompletedPractice; set => m_CompletedPractice = value; }
+
     [ReadOnly][SerializeField] private DominantHand m_UserDominantHand;
     internal DominantHand UserDominantHand { get => m_UserDominantHand; set => m_UserDominantHand = value; }
     internal DominantHand NonDominantHand
@@ -148,6 +151,7 @@ public class UserData
     public void ResetData()
     {
         m_Score = 0;
+        m_CompletedPractice = false;
 
         if (m_Responses != null) 
         {
@@ -259,6 +263,7 @@ public class DataCollector : MonoBehaviour
         DisplayController.OnPersonGenerated += SetPersonData;
         DisplayController.OnTrialOver += UpdateResponse;
         DisplayController.OnPracticeOver += ResetUserData;
+        DisplayController.OnPracticeOver += () => m_CurrentUserData.CompletedPractice = true;
         DisplayController.OnGameOver += ExportUserData;
 
         MainMenu.OnGameStart += SetDominantHand;
@@ -270,6 +275,7 @@ public class DataCollector : MonoBehaviour
         DisplayController.OnPersonGenerated -= SetPersonData;
         DisplayController.OnTrialOver -= UpdateResponse;
         DisplayController.OnPracticeOver -= ResetUserData;
+        DisplayController.OnPracticeOver -= () => m_CurrentUserData.CompletedPractice = true;
         DisplayController.OnGameOver -= ExportUserData;
 
         MainMenu.OnGameStart -= SetDominantHand;
@@ -308,6 +314,7 @@ public class DataCollector : MonoBehaviour
     private void ResetUserData()
     {
         m_CurrentUserData.ResetData();
+        OnScoreChanged?.Invoke(m_CurrentUserData.Score);
 
         m_CurrentBGData = null;
         m_CurrentPersonData = null;
