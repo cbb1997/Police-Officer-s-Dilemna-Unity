@@ -2732,7 +2732,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Armed men pose an imminent threat and should be shot as quickly as possible.
     \r\n\r\nHit: You will earn 10 points for shooting an armed man. \r\nMiss: You
-    will lose 40 points for clearing an armed man.\r\n"
+    will lose 40 points for clearing an armed man.\n\n\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

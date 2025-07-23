@@ -14,8 +14,8 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private GameObject m_TrialObjects;
 
+    private int m_ControlsScreenIndex = 1;
     private int m_DominantHand = 1;
-
     private int m_CurrentScreen;
 
     public static Action<int> OnGameStart;
@@ -51,6 +51,18 @@ public class MainMenu : MonoBehaviour
         {
             m_NextButton.gameObject.SetActive(false);
             m_StartButton.gameObject.SetActive(true);
+        }
+
+        if (m_CurrentScreen == m_ControlsScreenIndex)
+        {
+            if (m_DominantHand == 1)
+            {
+                m_Instructions[m_CurrentScreen].GetComponent<TMP_Text>().text += "Press [Left Arrow] to clear and [Right Arrow] to shoot.";
+            }
+            else if (m_DominantHand == 2)
+            {
+                m_Instructions[m_CurrentScreen].GetComponent<TMP_Text>().text += "Press [Left Arrow] to shoot and [Right Arrow] to clear.";
+            }
         }
 
         for (int i = 0; i < m_Instructions.Length; i++)

@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fe72471134f12345a8ec2745f6079b0, type: 3}
-  m_Name: Proto0.0.0 Data
+  m_Name: Proto0.1 Data
   m_EditorClassIdentifier: 
-  m_NumTrials: 16
+  m_NumTrials: 80
   m_MinImageTime: 0.5
   m_MaxImageTime: 1
-  m_FinalImageTime: 0.85
   m_MinPersonTime: 0
-  m_MaxPersonTime: 0.35
+  m_MaxPersonTime: 0
   m_MinImages: 1
   m_MaxImages: 4
   m_DisplayDelay: 0.2
