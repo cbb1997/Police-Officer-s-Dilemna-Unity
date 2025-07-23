@@ -244,21 +244,21 @@ public class DataCollector : MonoBehaviour
 
     private float m_Timer, m_PersonTimer;
 
-    private bool m_Responded = true;
+    private bool m_Responded;
 
     #endregion
 
+    #region Callbacks
     private void Start()
     {
         m_CurrentUserData = new UserData();
 
-        m_CurrentUserData.ResetData();
-
-        m_CurrentBGNames = new List<string>();
+        ResetUserData();
 
         DisplayController.OnBGGenerated += SetBGData;
         DisplayController.OnPersonGenerated += SetPersonData;
         DisplayController.OnTrialOver += UpdateResponse;
+        DisplayController.OnPracticeOver += ResetUserData;
         DisplayController.OnGameOver += ExportUserData;
 
         MainMenu.OnGameStart += SetDominantHand;
@@ -269,6 +269,7 @@ public class DataCollector : MonoBehaviour
         DisplayController.OnPersonGenerated -= SetPersonData;
         DisplayController.OnPersonGenerated -= SetPersonData;
         DisplayController.OnTrialOver -= UpdateResponse;
+        DisplayController.OnPracticeOver -= ResetUserData;
         DisplayController.OnGameOver -= ExportUserData;
 
         MainMenu.OnGameStart -= SetDominantHand;
@@ -300,9 +301,28 @@ public class DataCollector : MonoBehaviour
         }
     }
 
-    private void ClearResponseData()
+
+    #endregion
+
+    #region Private Methods
+    private void ResetUserData()
     {
-        m_CurrentBGNames.Clear();
+        m_CurrentUserData.ResetData();
+
+        m_CurrentBGData = null;
+        m_CurrentPersonData = null;
+
+        m_Timer = 0;
+        m_PersonTimer = 0;
+
+        ClearBGNames();
+
+        m_Responded = true;
+    }
+
+    private void ExportUserData()
+    {
+
     }
 
     private void ResetReponse()
@@ -312,16 +332,23 @@ public class DataCollector : MonoBehaviour
         m_Responded = false;
     }
 
-    private void RecordBGData()
+    private void ClearBGNames()
     {
-        m_CurrentBGNames.Add(m_CurrentBGData.ImageName);
+        if (m_CurrentBGNames != null)
+        {
+            m_CurrentBGNames.Clear();
+        }
+        else
+        {
+            m_CurrentBGNames = new List<string>();
+        }
     }
 
     private void SetBGData(BGData data)
     {
         m_CurrentBGData = data;
+        m_CurrentBGNames.Add(m_CurrentBGData.ImageName);
 
-        RecordBGData();
         ResetReponse();
     }
 
@@ -342,17 +369,17 @@ public class DataCollector : MonoBehaviour
             NewResponse(ResponseType.NoResponse);
         }
 
-        ClearResponseData();
+        ClearBGNames();
     }
 
-    private void ExportUserData()
-    {
 
-    }
+    #endregion
+
+    #region Public Methods
 
     public void SetDominantHand(int hand)
     {
-        m_CurrentUserData.UserDominantHand = (DominantHand) hand;
+        m_CurrentUserData.UserDominantHand = (DominantHand)hand;
     }
 
     public void NewResponse(int responseType)
@@ -380,6 +407,8 @@ public class DataCollector : MonoBehaviour
         OnScoreChanged?.Invoke(m_CurrentUserData.Score);
         OnUserResponse?.Invoke(currentResponse);
     }
+
+    #endregion
 }
 
 #endregion
