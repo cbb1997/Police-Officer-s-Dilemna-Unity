@@ -6,8 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DisplayData", menuName = "ScriptableObjects/DisplayData")]
 public class DisplayData : ScriptableObject
 {
-    [SerializeField] private int m_NumTrials;
+    [SerializeField] private int m_NumTrials, m_NumPracticeTrials;
     public int NumTrials { get => m_NumTrials; }
+    public int NumPracticeTrials { get => m_NumPracticeTrials; }
 
     [SerializeField] private float m_MinImageTime, m_MaxImageTime, m_FinalImageTime;
     public float MinImageTime { get => m_MinImageTime; }

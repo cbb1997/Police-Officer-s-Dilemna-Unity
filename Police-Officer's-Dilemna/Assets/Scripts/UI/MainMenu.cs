@@ -14,7 +14,8 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private GameObject m_TrialObjects;
 
-    private int m_ControlsScreenIndex = 1;
+    [SerializeField] private int m_ControlsScreenIndex;
+
     private int m_DominantHand = 1;
     private int m_CurrentScreen;
 

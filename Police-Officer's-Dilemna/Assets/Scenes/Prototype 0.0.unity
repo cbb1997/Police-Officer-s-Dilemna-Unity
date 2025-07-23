@@ -499,6 +499,7 @@ MonoBehaviour:
   - {fileID: 332366158}
   - {fileID: 1027010441}
   m_TrialObjects: {fileID: 201200944}
+  m_ControlsScreenIndex: 1
 --- !u!1 &487644370
 GameObject:
   m_ObjectHideFlags: 0

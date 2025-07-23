@@ -17,12 +17,14 @@ public class DisplayController : MonoBehaviour
     public static Action<BGData> OnBGGenerated;
     public static Action<PersonData> OnPersonGenerated;
     public static Action OnTrialOver;
+    public static Action OnPracticeOver;
     public static Action OnGameOver;
 
     #endregion
 
     #region Members
     private int m_TrialNumber, m_ImageNumber;
+    private bool m_IsPractice;
 
     private float m_CurrentGenerationTime;
     private Vector2 m_CurrentImagePos;
@@ -49,9 +51,16 @@ public class DisplayController : MonoBehaviour
         m_ImageDatabase.MakePersonPool(m_DisplayData.NumTrials);
         m_ImageDatabase.MakeBGPool(m_DisplayData.NumTrials * m_DisplayData.MaxImages);
 
-        NewTrial();
+        m_IsPractice = m_DisplayData.NumPracticeTrials > 0;
+
     }
     
+    private void OnEnable()
+    {
+        m_TrialNumber = 0;
+        NewTrial();
+    }
+
     private void Update()
     {
         
@@ -62,14 +71,6 @@ public class DisplayController : MonoBehaviour
     #region ImageGeneration
     private void NewTrial()
     {
-        /**
-        if (m_TrialNumber >= m_DisplayData.NumTrials)
-        {
-            OnGameOver?.Invoke();
-            return;
-        }
-        */
-
         StartCoroutine(TrialHelper(m_DisplayData.TrialDelay));
     }
 
@@ -82,14 +83,29 @@ public class DisplayController : MonoBehaviour
 
         yield return new WaitForSeconds(delay);
 
-        if (m_TrialNumber >= m_DisplayData.NumTrials)
+        if (m_IsPractice)
         {
-            OnGameOver?.Invoke();
-            StopAllCoroutines();
+            if (m_TrialNumber >= m_DisplayData.NumPracticeTrials)
+            {
+                OnPracticeOver?.Invoke();
+                StopAllCoroutines();
+            }
+            else
+            {
+                GenerateImage();
+            }
         }
         else
         {
-            GenerateImage();
+            if (m_TrialNumber >= m_DisplayData.NumTrials)
+            {
+                OnGameOver?.Invoke();
+                StopAllCoroutines();
+            }
+            else
+            {
+                GenerateImage();
+            }
         }
     }
 
