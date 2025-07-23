@@ -388,7 +388,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &364217930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,8 +544,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dadf77dbb5289d47bd8f37b9ee92d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_PracticeEndMenu: {fileID: 0}
   m_EndMenu: {fileID: 1638695477}
   m_TrialObjects: {fileID: 201200944}
+  m_PracticeEndText: {fileID: 0}
   m_EndText: {fileID: 567200009}
 --- !u!1 &513735207
 GameObject:
@@ -2856,6 +2858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CurrentUserData:
     m_Score: 0
+    m_CompletedPractice: 0
     m_UserDominantHand: 0
     m_Responses: []
   m_DefaultPersonData: {fileID: 11400000, guid: f4ead7aed257afd49befb340e05575ec, type: 2}
@@ -3674,7 +3677,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1638695478
 MonoBehaviour:
   m_ObjectHideFlags: 0
