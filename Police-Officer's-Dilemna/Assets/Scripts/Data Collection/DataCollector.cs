@@ -242,7 +242,7 @@ public class DataCollector : MonoBehaviour
     #region Private Member Fields
     private List<string> m_CurrentBGNames;
 
-    private float m_CurrentResponseTime;
+    private float m_Timer, m_PersonTimer;
 
     private bool m_Responded = true;
 
@@ -282,7 +282,7 @@ public class DataCollector : MonoBehaviour
 
         m_Responded = inputX != 0;
 
-        m_CurrentResponseTime += Time.deltaTime;
+        m_Timer += Time.deltaTime;
 
         if (m_Responded && m_CurrentPersonData == m_DefaultPersonData)
         {
@@ -308,7 +308,7 @@ public class DataCollector : MonoBehaviour
     private void ResetReponse()
     {
         m_CurrentPersonData = m_DefaultPersonData;
-        m_CurrentResponseTime = 0;
+        m_Timer = 0;
         m_Responded = false;
     }
 
@@ -329,7 +329,8 @@ public class DataCollector : MonoBehaviour
     {
         m_CurrentPersonData = data;
 
-        m_CurrentResponseTime = 0;
+        m_PersonTimer = m_Timer;
+        m_Timer = 0;
     }
 
     private void UpdateResponse()
@@ -356,10 +357,10 @@ public class DataCollector : MonoBehaviour
 
     public void NewResponse(int responseType)
     {
-        UserResponse currentResponse = new UserResponse((ResponseType)responseType, m_CurrentPersonData.PersonRace, m_CurrentPersonData.PersonObject,
+        UserResponse currentResponse = new UserResponse((ResponseType) responseType, m_CurrentPersonData.PersonRace, m_CurrentPersonData.PersonObject,
             m_CurrentBGNames, m_CurrentPersonData.ImageName,
             m_CurrentPersonData.CurrentPosition, m_CurrentUserData.Score, m_CurrentBGNames.Count,
-            m_CurrentResponseTime, 0.0f, 0.0f);
+            m_Timer, 0.85f, m_PersonTimer);
 
         m_CurrentUserData.AddResponse(currentResponse);
 
@@ -372,7 +373,7 @@ public class DataCollector : MonoBehaviour
         UserResponse currentResponse = new UserResponse(responseType, m_CurrentPersonData.PersonRace, m_CurrentPersonData.PersonObject, 
             m_CurrentBGNames, m_CurrentPersonData.ImageName,
             m_CurrentPersonData.CurrentPosition, m_CurrentUserData.Score, m_CurrentBGNames.Count,
-            m_CurrentResponseTime, 0.0f, 0.0f);
+            m_Timer, 0.85f, m_PersonTimer);
 
         m_CurrentUserData.AddResponse(currentResponse);
 
