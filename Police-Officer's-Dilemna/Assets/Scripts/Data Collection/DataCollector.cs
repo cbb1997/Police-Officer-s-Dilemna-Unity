@@ -239,6 +239,7 @@ public class DataCollector : MonoBehaviour
 
     #region Actions
     public static Action<UserResponse> OnUserResponse;
+    public static Action<UserData> OnDataUpdated;
     public static Action<int> OnScoreChanged;
 
     #endregion
@@ -314,6 +315,8 @@ public class DataCollector : MonoBehaviour
     private void ResetUserData()
     {
         m_CurrentUserData.ResetData();
+
+        OnDataUpdated?.Invoke(m_CurrentUserData);
         OnScoreChanged?.Invoke(m_CurrentUserData.Score);
 
         m_CurrentBGData = null;
@@ -412,6 +415,7 @@ public class DataCollector : MonoBehaviour
         m_CurrentUserData.AddResponse(currentResponse);
 
         OnScoreChanged?.Invoke(m_CurrentUserData.Score);
+        //OnDataUpdated?.Invoke(m_CurrentUserData);
         OnUserResponse?.Invoke(currentResponse);
     }
 

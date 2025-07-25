@@ -8,7 +8,7 @@ public class DisplayData : ScriptableObject
 {
     [SerializeField] private int m_NumTrials, m_NumPracticeTrials;
     public int NumTrials { get => m_NumTrials; }
-    public int NumPracticeTrials { get => m_NumPracticeTrials; }
+    public int NumPracticeTrials { get => m_NumPracticeTrials; set => m_NumPracticeTrials = value; }
 
     [SerializeField] private float m_MinImageTime, m_MaxImageTime, m_FinalImageTime;
     public float MinImageTime { get => m_MinImageTime; }

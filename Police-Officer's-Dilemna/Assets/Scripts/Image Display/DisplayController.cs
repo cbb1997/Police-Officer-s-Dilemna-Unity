@@ -51,14 +51,7 @@ public class DisplayController : MonoBehaviour
         m_ImageDatabase.MakePersonPool(m_DisplayData.NumTrials);
         m_ImageDatabase.MakeBGPool(m_DisplayData.NumTrials * m_DisplayData.MaxImages);
 
-        m_IsPractice = m_DisplayData.NumPracticeTrials > 0;
-
-    }
-    
-    private void OnEnable()
-    {
-        m_TrialNumber = 0;
-        NewTrial();
+        StartTrials();
     }
 
     private void Update()
@@ -69,6 +62,15 @@ public class DisplayController : MonoBehaviour
     #endregion
 
     #region ImageGeneration
+    public void StartTrials()
+    {
+        m_IsPractice = m_DisplayData.NumPracticeTrials > 0;
+
+        m_TrialNumber = 0;
+        NewTrial();
+    }
+
+
     private void NewTrial()
     {
         StartCoroutine(TrialHelper(m_DisplayData.TrialDelay));
@@ -87,8 +89,10 @@ public class DisplayController : MonoBehaviour
         {
             if (m_TrialNumber >= m_DisplayData.NumPracticeTrials)
             {
-                OnPracticeOver?.Invoke();
+                m_DisplayData.NumPracticeTrials = 0;
                 StopAllCoroutines();
+
+                OnPracticeOver?.Invoke();
             }
             else
             {
@@ -99,8 +103,9 @@ public class DisplayController : MonoBehaviour
         {
             if (m_TrialNumber >= m_DisplayData.NumTrials)
             {
-                OnGameOver?.Invoke();
                 StopAllCoroutines();
+
+                OnGameOver?.Invoke();
             }
             else
             {
