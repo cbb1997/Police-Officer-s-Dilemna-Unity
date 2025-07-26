@@ -104,6 +104,8 @@ public class SaveController : MonoBehaviour
 
     private string AesDecrypt(byte[] data)
     {
+        string text = null;
+
         using (Aes aes = Aes.Create())
         {
             aes.Key = m_Key;
@@ -111,12 +113,15 @@ public class SaveController : MonoBehaviour
 
             var decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
-            using (MemoryStream msDecrypt = new MemoryStream())
+            using (MemoryStream msDecrypt = new MemoryStream(data))
             using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
             using (StreamReader srDecrypt = new StreamReader(csDecrypt))
             {
-                return srDecrypt.ReadToEnd();
+                text = srDecrypt.ReadToEnd();
+                srDecrypt.Close();
             }
         }
+
+        return text;
     }
 }
