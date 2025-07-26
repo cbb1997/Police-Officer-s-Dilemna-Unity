@@ -60,9 +60,11 @@ public class SaveController : MonoBehaviour
     {
         string json = JsonUtility.ToJson(m_UserData);
 
+        /**
         byte[] bytes = AesEncrypt(json);
 
         Debug.Log(json == AesDecrypt(bytes));
+        */
 
         return;
 
