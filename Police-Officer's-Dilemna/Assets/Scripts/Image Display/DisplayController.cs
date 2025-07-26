@@ -148,7 +148,7 @@ public class DisplayController : MonoBehaviour
 
         StartCoroutine(GenerateBG(m_CurrentGenerationTime));
 
-        Debug.Log($"BG Display Time: {m_CurrentGenerationTime}");
+        //Debug.Log($"BG Display Time: {m_CurrentGenerationTime}");
 
         float maxTime = m_CurrentGenerationTime + (m_DisplayData.MaxPersonTime - m_DisplayData.MaxImageTime);
 

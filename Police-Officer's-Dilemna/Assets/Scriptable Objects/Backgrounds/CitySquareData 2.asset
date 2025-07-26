@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 866894ddb12db6a498f40d2468a74477, type: 3}
   m_Name: CitySquareData 2
   m_EditorClassIdentifier: 
-  m_ImageName: 
+  m_ImageName: City Square-2
   m_ImageRef: {fileID: 0}
   m_PrefabRef: {fileID: 1699576771660643483, guid: 78d684bd2808408458b89ca26a67e949, type: 3}
   m_DisplayPositions:

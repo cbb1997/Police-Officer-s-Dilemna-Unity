@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 866894ddb12db6a498f40d2468a74477, type: 3}
   m_Name: BusStopData
   m_EditorClassIdentifier: 
-  m_ImageName: 
+  m_ImageName: Bus Stop
   m_ImageRef: {fileID: 0}
   m_PrefabRef: {fileID: 1516329527660580552, guid: c37bc93eb56e78643a350d0a2ae10001, type: 3}
   m_DisplayPositions:

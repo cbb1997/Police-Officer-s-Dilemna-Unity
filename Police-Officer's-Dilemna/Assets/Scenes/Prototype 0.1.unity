@@ -1000,11 +1000,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b91527b87b278844b6d1a60b2273995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UserData:
-    m_Score: 0
-    m_CompletedPractice: 0
-    m_UserDominantHand: 0
-    m_Responses: []
+  m_Key: ciAawTFyCnWtYiNX8kYPDS86GoMdHT65YGkxWET42GE=
+  m_InitVector: 
 --- !u!1 &567200007
 GameObject:
   m_ObjectHideFlags: 0
@@ -3373,7 +3370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58881d0133c6e142ba83b8971560ee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DisplayData: {fileID: 11400000, guid: 413b23bcd92e7084b94cde029e60975f, type: 2}
+  m_DisplayData: {fileID: 11400000, guid: 2af6263e3b487914eabc4fcdaeee7726, type: 2}
   m_ScreenFilter: {fileID: 943563185}
   m_ImageDatabase: {fileID: 1465035057}
 --- !u!114 &1465035057
